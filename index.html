@@ -90,6 +90,13 @@ h2{font-size:clamp(30px,8.4vw,46px);line-height:1.05}
 .offer .pr{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px}
 .offer s{color:var(--discret);font-size:15px;font-weight:500;margin-left:6px}
 .offer small{display:block;color:var(--discret);margin-top:4px;font-size:14px}
+.offer{cursor:pointer}
+.offer.sel{border-color:var(--accent2);box-shadow:0 0 0 2px var(--accent2)}
+.rd{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--discret);margin-right:10px;vertical-align:-3px}
+.offer.sel .rd{border-color:var(--accent2);background:radial-gradient(var(--accent2) 45%,transparent 50%)}
+.cartfloat{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:80;width:62px;height:62px;border-radius:50%;border:0;background:var(--grad);color:var(--surAccent);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 12px 30px -8px var(--accent)}
+.cartfloat .cnt{background:var(--fond);color:var(--texte);top:-4px;right:-4px}
+body.cart-open .cartfloat{display:none}
 .offer .tag{position:absolute;top:-11px;right:16px;padding:4px 12px;border-radius:999px;background:var(--grad);color:var(--surAccent);font-size:12px;font-weight:800}
 .sizes{display:flex;flex-wrap:wrap;gap:10px}
 .sz{min-width:56px;padding:14px 12px;border-radius:16px;border:1px solid var(--ligne);background:rgba(255,255,255,.05);color:var(--texte);font:inherit;font-weight:800;font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none}
@@ -291,6 +298,9 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
   </div>
 </div>
 
+<!-- panier toujours visible, partout -->
+<button class="cartfloat" id="cartFloat" aria-label="Panier"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span class="cnt" id="cnt3">0</span></button>
+
 <footer id="foot"></footer>
 
 <script>
@@ -318,7 +328,7 @@ const SITE = {
   /* ──────────────────────────────────────────────
      1) À REMPLIR EN PREMIER (très important)
      ────────────────────────────────────────────── */
-  marque: "S Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
+  marque: "Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
   paypalMe: "",                 // Ton pseudo PayPal.me. Si ton lien est paypal.me/clement, écris "clement".
                                 // Sans ça, le bouton « Valider et payer » n'ouvre pas PayPal.
   emailCommande: "",            // (facultatif) ton e-mail, pour que le client t'envoie sa commande
@@ -468,7 +478,7 @@ const SITE = {
       image: "https://i.postimg.cc/13gxWMFq/IMG-6083.jpg"
     },
     {
-      nom: "Marine donovan ",
+      nom: "léo donovan ",
       note: 5,
       verifie: false,
       texte: "Très bonne expérience. Produits arrivés intacts. Livraison en 9 jours, qualité finale très haute..",
@@ -497,7 +507,7 @@ const SITE = {
   /* ──────────────────────────────────────────────
      9) BAS DE PAGE
      ────────────────────────────────────────────── */
-  piedDePage: "© S Sakashop"
+  piedDePage: "© Sakashop"
 };
 
 </script>
@@ -567,15 +577,20 @@ const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août"
 })();
 
 /* ---------- offres ---------- */
-(function(){
+let offreChoisie = 1;                  // 1 = une veste, 3 = le pack
+function renderOffers(){
   const q = OF.packQte, normal = OF.unite * q, eco = normal - OF.pack;
   const pct = Math.round(eco / normal * 100);
   $("offers").innerHTML =
-    `<div class="offer"><div class="row"><b>1 veste</b><span class="pr">${money(OF.unite)}</span></div><small>Couleur et taille au choix</small></div>` +
-    `<div class="offer best"><span class="tag">MEILLEURE OFFRE · -${pct} %</span>` +
-    `<div class="row"><b>Pack ${q} vestes</b><span class="pr">${money(OF.pack)}<s>${money(normal)}</s></span></div>` +
-    `<small>Soit ${money(OF.pack / q)} la veste · tu économises ${money(eco)}</small></div>`;
-})();
+    `<div class="offer${offreChoisie === 1 ? " sel" : ""}" data-offer="1"><div class="row"><b><span class="rd"></span>1 veste</b><span class="pr">${money(OF.unite)}</span></div><small>Couleur et taille au choix</small></div>` +
+    `<div class="offer best${offreChoisie === q ? " sel" : ""}" data-offer="${q}"><span class="tag">MEILLEURE OFFRE · -${pct} %</span>` +
+    `<div class="row"><b><span class="rd"></span>Pack ${q} vestes</b><span class="pr">${money(OF.pack)}<s>${money(normal)}</s></span></div>` +
+    `<small>Soit ${money(OF.pack / q)} la veste · tu économises ${money(eco)}</small>` +
+    (offreChoisie === q ? `<small>Ajoute 3 vestes (même couleur, ou mélange-les depuis le catalogue) : le prix du pack s'applique tout seul.</small>` : "") + `</div>`;
+  const b = $("addProd"); if (b) b.textContent = offreChoisie === 1 ? "Ajouter au panier" : "Ajouter le pack de " + q;
+}
+renderOffers();
+$("offers").addEventListener("click", e => { const o = e.target.closest("[data-offer]"); if (o) { offreChoisie = +o.dataset.offer; renderOffers(); } });
 
 /* ---------- tailles ---------- */
 let taille = SITE.tailles.length > 1 ? SITE.tailles[1].t : SITE.tailles[0].t;   // S par défaut
@@ -629,8 +644,8 @@ function closeProd(){ prodSheet.classList.remove("open"); prodSheet.setAttribute
 $("closeProd").onclick = closeProd;
 $("grid").addEventListener("click", e => { const b = e.target.closest("[data-open]"); if (b) openProd(+b.dataset.open); });
 $("addProd").onclick = () => {
-  const k = cur + "|" + taille; cart[k] = (cart[k] || 0) + 1; majCompteur();
-  const b = $("addProd"); b.textContent = "Ajouté ✓ (taille " + taille + ")"; setTimeout(() => b.textContent = "Ajouter au panier", 1100);
+  const k = cur + "|" + taille; cart[k] = (cart[k] || 0) + offreChoisie; majCompteur();
+  const b = $("addProd"); b.textContent = "Ajouté ✓ (taille " + taille + ")"; setTimeout(renderOffers, 1100);
 };
 $("seeCart").onclick = () => openCart();
 const sheet = $("sheet");
@@ -654,11 +669,11 @@ const remise = () => Math.max(0, sousTotal() - total());
 const parse = k => { const [i, t] = k.split("|"); return { p: SITE.produits[+i], t }; };
 function majCompteur(){
   const n = nbArticles();
-  ["cnt1", "cnt2"].forEach(id => { $(id).textContent = n; $(id).style.display = n ? "flex" : "none"; });
+  ["cnt1", "cnt2", "cnt3"].forEach(id => { $(id).textContent = n; $(id).style.display = n ? "flex" : "none"; });
 }
-function openCart(){ closeProd(); closeSheet(); renderCart(); cartSheet.classList.add("open"); cartSheet.setAttribute("aria-hidden","false"); cartSheet.scrollTop = 0; document.body.style.overflow = "hidden"; }
-function closeCart(){ cartSheet.classList.remove("open"); cartSheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; }
-$("cartBtn").onclick = openCart; $("cartBtn2").onclick = openCart; $("closeCart").onclick = closeCart;
+function openCart(){ closeProd(); closeSheet(); renderCart(); document.body.classList.add("cart-open"); cartSheet.classList.add("open"); cartSheet.setAttribute("aria-hidden","false"); cartSheet.scrollTop = 0; document.body.style.overflow = "hidden"; }
+function closeCart(){ document.body.classList.remove("cart-open"); cartSheet.classList.remove("open"); cartSheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; }
+$("cartBtn").onclick = openCart; $("cartBtn2").onclick = openCart; $("cartFloat").onclick = openCart; $("closeCart").onclick = closeCart;
 
 function recapTexte(){
   const lignes = Object.keys(cart).map(k => { const { p, t } = parse(k); return `${cart[k]} x ${p.nom} — Taille ${t} — ${money(cart[k] * OF.unite)}`; });

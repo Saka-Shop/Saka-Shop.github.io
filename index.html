@@ -64,6 +64,46 @@ section{max-width:640px;margin:0 auto;padding:64px 20px 10px;text-align:center}
 h2{font-size:clamp(30px,8.4vw,46px);line-height:1.05}
 .sub{color:var(--discret);margin:14px 0 32px;font-size:17px}
 
+/* fiche produit : photos + livraison + offres + tailles */
+.fiche{padding-top:40px}
+.gal-main{position:relative;border-radius:32px;overflow:hidden;background:var(--carte);border:1px solid var(--ligne);aspect-ratio:3/4}
+.gal-main img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--discret);font-weight:600}
+.gal-tag{position:absolute;left:14px;top:14px;padding:7px 14px;border-radius:999px;background:rgba(20,16,40,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);font-size:13px;font-weight:600}
+.thumbs{display:flex;gap:12px;margin-top:14px}
+.thumb{width:84px;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:2px solid var(--ligne);background:var(--carte);cursor:pointer;padding:0;position:relative;color:var(--discret);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb.on{border-color:var(--accent2)}
+.deliv{display:flex;align-items:center;gap:16px;margin-top:22px;padding:16px 20px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid var(--ligne);text-align:left}
+.deliv small{display:block;color:var(--discret);font-size:13px}
+.deliv b{font-size:18px}
+.deliv .sep{width:1px;align-self:stretch;background:var(--ligne)}
+.deliv .free{font-weight:700;font-size:16px}
+.step{display:flex;align-items:center;gap:12px;margin:34px 0 14px;text-align:left}
+.step i{font-style:normal;width:34px;height:34px;border-radius:50%;background:var(--grad);color:var(--surAccent);display:flex;align-items:center;justify-content:center;font-weight:800;flex:none}
+.step h3{font-size:22px}
+.offers{display:grid;gap:12px;text-align:left}
+.offer{position:relative;padding:18px 20px;border-radius:22px;border:1px solid var(--ligne);background:rgba(255,255,255,.04)}
+.offer.best{border-color:rgba(255,207,63,.55);background:rgba(255,207,63,.07)}
+.offer .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.offer b{font-size:18px}
+.offer .pr{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px}
+.offer s{color:var(--discret);font-size:15px;font-weight:500;margin-left:6px}
+.offer small{display:block;color:var(--discret);margin-top:4px;font-size:14px}
+.offer .tag{position:absolute;top:-11px;right:16px;padding:4px 12px;border-radius:999px;background:var(--grad);color:var(--surAccent);font-size:12px;font-weight:800}
+.sizes{display:flex;flex-wrap:wrap;gap:10px}
+.sz{min-width:56px;padding:14px 12px;border-radius:16px;border:1px solid var(--ligne);background:rgba(255,255,255,.05);color:var(--texte);font:inherit;font-weight:800;font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.sz.on{background:var(--grad);color:var(--surAccent);border-color:transparent}
+.sznote{color:var(--discret);font-size:15px;margin-top:12px;text-align:left}
+.guidebtn{display:inline-block;margin-top:12px;background:none;border:0;color:var(--texte);font:inherit;font-size:15px;text-decoration:underline;cursor:pointer;text-align:left}
+
+/* guide des tailles */
+.gt{width:100%;border-collapse:collapse;font-size:14px;text-align:center}
+.gt th,.gt td{border:1px solid var(--ligne);padding:12px 4px}
+.gt th{background:rgba(255,255,255,.07);font-family:'Bricolage Grotesque'}
+.gt td:first-child{font-weight:600;text-align:left;padding-left:8px}
+.gt tr.hl td,.gt th.hl{background:rgba(255,207,63,.14)}
+
 /* cartes + flèches */
 .card{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--ligne);border-radius:32px;padding:32px 28px;text-align:left;min-height:250px;touch-action:pan-y}
 .card.in{animation:slide .35s ease}
@@ -91,14 +131,6 @@ td.us{background:rgba(255,255,255,.05)}
 .ok{background:var(--grad);color:var(--surAccent)}
 .no{background:rgba(255,255,255,.08);color:var(--discret)}
 
-/* catalogue */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
-.prod{background:var(--carte);border:1px solid var(--ligne);border-radius:24px;padding:10px;text-decoration:none;display:block;transition:transform .2s}
-.prod:active{transform:scale(.97)}
-.prod .im{aspect-ratio:1/1;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
-.prod h3{font-size:16px;margin:12px 4px 2px}
-.prod .pr{margin:0 4px 6px;font-weight:700}
-
 /* avis */
 .rev{padding:14px;overflow:hidden}
 .rev img{width:100%;height:auto;max-height:480px;display:block;object-fit:cover;border-radius:22px}
@@ -110,14 +142,10 @@ td.us{background:rgba(255,255,255,.05)}
 
 footer{max-width:640px;margin:70px auto 0;padding:30px 20px;text-align:center;color:var(--discret);font-size:14px;border-top:1px solid var(--ligne)}
 
-/* barre fixe */
-.cta{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(14,12,27,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ligne)}
-.cta a{display:block;max-width:640px;margin:0 auto;text-align:center;text-decoration:none;font-weight:700;font-size:19px;padding:16px;border-radius:999px;background:var(--grad);color:var(--surAccent)}
-
-/* apparition au scroll */
-/* catalogue (panneau qui s'ouvre sur la même page) */
+/* panneaux */
 .sheet{position:fixed;left:0;right:0;top:0;bottom:0;z-index:50;background:var(--fond);overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s .45s}
 .sheet.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#sizeSheet{z-index:60}
 .sheet-in{max-width:640px;margin:0 auto;padding:24px 20px 60px}
 .sheet-top{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left}
 .sheet-top h2{font-size:clamp(28px,8vw,40px)}
@@ -126,20 +154,25 @@ footer{max-width:640px;margin:70px auto 0;padding:30px 20px;text-align:center;co
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
 .prod{background:var(--carte);border:1px solid var(--ligne);border-radius:24px;padding:10px;text-decoration:none;display:block;transition:transform .2s}
 .prod:active{transform:scale(.97)}
-.prod .im{aspect-ratio:1/1;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
+.prod .im{aspect-ratio:4/5;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
 .prod h3{font-size:16px;margin:12px 4px 2px}
 .prod .pr{margin:0 4px 6px;font-weight:700}
 .prod .rt{margin:12px 4px 0;font-size:13px;color:var(--discret)}
 .prod .st{margin:0 4px 6px;font-size:13px;color:var(--accent2)}
+.cat-size{margin-bottom:22px;text-align:left}
+.cat-size .lab{font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cat-size .sz{min-width:48px;padding:11px 10px;font-size:14px}
 /* panier */
 .cartbtn{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
 .cnt{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--grad);color:var(--surAccent);font-size:12px;font-weight:800;display:none;align-items:center;justify-content:center}
-.add{width:100%;margin-top:8px;padding:12px;border-radius:14px;border:0;background:var(--grad);color:var(--surAccent);font-weight:700;font-size:14px;cursor:pointer}
+.add{width:100%;margin-top:10px;padding:15px 8px;border-radius:999px;border:0;background:var(--grad);color:var(--surAccent);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.prod .also{margin:0 4px;font-size:13px;color:var(--accent2);font-weight:600}
 .line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid var(--ligne);text-align:left}
 .line b{display:block}.line small{color:var(--discret)}
 .qty{display:flex;align-items:center;gap:10px;font-weight:700}
 .qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.07);color:var(--texte);font-size:18px;cursor:pointer}
 .tot{display:flex;justify-content:space-between;font-size:20px;font-weight:700;padding:20px 0}
+.promo{display:flex;justify-content:space-between;color:var(--accent2);font-weight:600;padding:14px 0 0;text-align:left}
 .note{color:var(--discret);font-size:14px;margin-top:18px;text-align:left}
 .vide{color:var(--discret);padding:40px 0}
 .inp{display:block;width:100%;padding:16px;border-radius:16px;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);font:inherit;font-size:16px;margin-top:12px;-webkit-appearance:none;appearance:none}
@@ -214,10 +247,47 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
   </div>
 </div>
 
+<!-- FICHE PRODUIT : s'ouvre quand on appuie sur « Choisir ma taille » -->
+<div class="sheet" id="prodSheet" aria-hidden="true" style="z-index:55">
+  <div class="sheet-in">
+    <div class="sheet-top"><h2 id="prodTitle" style="font-size:clamp(22px,6vw,30px)"></h2>
+      <button class="x" id="closeProd" aria-label="Fermer">✕</button></div>
+    <div style="text-align:left;margin-top:20px">
+      <div class="gal-main" id="galMain"></div>
+      <div class="thumbs" id="thumbs"></div>
+
+      <div class="deliv">
+        <div><small>Livré entre</small><b id="livDates"></b></div>
+        <div class="sep"></div>
+        <div class="free" id="livFree"></div>
+      </div>
+
+      <div class="step"><i>1</i><h3>Choisis ton offre</h3></div>
+      <div class="offers" id="offers"></div>
+
+      <div class="step"><i>2</i><h3>Choisis ta taille</h3></div>
+      <div class="sizes" id="sizesFiche"></div>
+      <p class="sznote" id="sznoteFiche"></p>
+      <button class="guidebtn" data-guide>📏 Guide des tailles</button>
+
+      <button class="btn main" id="addProd" style="margin-top:28px">Ajouter au panier</button>
+      <button class="link" id="seeCart" type="button" style="display:block;margin:14px auto 0">Voir mon panier</button>
+    </div>
+  </div>
+</div>
+
 <div class="sheet" id="cartSheet" aria-hidden="true">
   <div class="sheet-in">
     <div class="sheet-top"><h2 id="cartTitle">Ton panier</h2><button class="x" id="closeCart" aria-label="Fermer">✕</button></div>
     <div id="cartView"></div>
+  </div>
+</div>
+
+<div class="sheet" id="sizeSheet" aria-hidden="true">
+  <div class="sheet-in">
+    <div class="sheet-top"><h2>Guide des tailles</h2><button class="x" id="closeSize" aria-label="Fermer">✕</button></div>
+    <p class="sub">Trouve ton poids <b>et</b> ta taille dans le tableau : la colonne où les deux se croisent, c'est ta taille de veste. Entre deux tailles ? Prends la taille au-dessus pour plus de confort.</p>
+    <table class="gt" id="sizeTable"></table>
   </div>
 </div>
 
@@ -237,6 +307,7 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
    • Pour SUPPRIMER un élément : efface toute sa ligne { ... },
    • Les photos : envoie-les sur GitHub (Add file → Upload files), puis écris
      leur nom ici, par exemple "accueil.jpg".
+   • Les prix s'écrivent avec un POINT (19.95) et jamais une virgule.
 
    Si le site devient vide ou affiche une erreur en rouge, c'est qu'une
    virgule ou un guillemet a été effacé : regarde la ligne que tu viens de changer.
@@ -254,6 +325,30 @@ const SITE = {
   devise: "€",                  // Le symbole de la monnaie
   messagePaiement: "Paiement via PayPal, option « Amis proche » (protection de l'acheteur incluse).",
                                 // Le message affiché sous le formulaire de commande
+
+
+  /* ──────────────────────────────────────────────
+     1 bis) PRIX, LIVRAISON ET TAILLES
+     ────────────────────────────────────────────── */
+  offre: {
+    unite: 19.95,               // Prix d'UNE veste
+    pack: 39.99,                // Prix du pack
+    packQte: 3                  // Nombre de vestes dans le pack (3 pour 39.99)
+  },
+  livraison: {
+    joursMin: 1,                // « Livré entre » : début = aujourd'hui + 1 jour (le 19 → le 20)
+    joursMax: 6,                // « Livré entre » : fin = aujourd'hui + 6 jours (le 19 → le 25)
+    texte: "Livraison gratuite" // Texte à droite de la case de livraison
+  },
+  // Taille, tranche de poids, tranche de hauteur (utilisées dans le guide des tailles)
+  tailles: [
+    { t: "XS",  poids: "-58 kg",    hauteur: "-162 cm" },
+    { t: "S",   poids: "58-66 kg",  hauteur: "162-170 cm" },
+    { t: "M",   poids: "66-75 kg",  hauteur: "170-177 cm" },
+    { t: "L",   poids: "75-85 kg",  hauteur: "177-184 cm" },
+    { t: "XL",  poids: "85-95 kg",  hauteur: "184-190 cm" },
+    { t: "XXL", poids: "95-105 kg", hauteur: "190-196 cm" }
+  ],
 
 
   /* ──────────────────────────────────────────────
@@ -281,7 +376,6 @@ const SITE = {
     ligne2: "premium quality",   // Gros titre, ligne 2 (en couleur)
     ligne3: "petit prix",     // Gros titre, ligne 3 (en blanc)
 
-  
     badge2: { titre: "📦 livraison 1-5j ", texte: "livraison gratuit" },   // Petite bulle à droite de la photo
 
     personnesEnLigne: "7",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
@@ -332,19 +426,20 @@ const SITE = {
 
   /* ──────────────────────────────────────────────
      7) LE CATALOGUE (s'ouvre quand on appuie sur le gros bouton)
-     prix = juste un nombre, sans le symbole € (ex: 12.5 pour 12,50 €)
-     image = nom de ta photo (ex: "produit1.jpg"), vide = petite brique 🧱
+     Le prix vient de « offre » plus haut (19.95 € l'unité, 3 pour 39.99 €).
+     image = photo de DEVANT (lien ou nom de fichier), vide = petite brique 🧱
+     dos   = photo de DERRIÈRE (affichée quand on ouvre la veste), vide = cadre « Photo ici »
      note / avis / stock = laisse "" tant que tu n'as pas de vrais chiffres (rien ne s'affiche)
      ────────────────────────────────────────────── */
   titre4: "Le catalogue",                 // Titre en haut du catalogue
-  soustitre4: "Ton sous-titre ici.",      // Petit texte sous le titre
+  soustitre4: "Choisis ta couleur.",      // Petit texte sous le titre
   produits: [
-    { nom: "Veste imperméable Brésil (Noir)", prix: 19.95, image: "", note: "4,87", avis: "351", stock: "8" },
-    { nom: "Veste imperméable Brésil (Beige)", prix: 19,95, image: "", note: "5", avis: "10", stock: "8" },
-    { nom: "Veste imperméable Brésil (Bleu)", prix: 19.95, image: "", note: "4,88", avis: "176", stock: "8" },
-    { nom: "Veste imperméable Brésil (Jaune)", prix: 19.95, image: "", note: "4.93", avis: "142", stock: "8" },
-    { nom: "Veste imperméable Brésil (Vert)", prix: 19.95, image: "", note: "4,92", avis: "323", stock: "8" },
-    { nom: "Veste imperméable Brésil (Rose)", prix: 19.95, image: "", note: "4,9", avis: "214", stock: "8" },
+    { nom: "Veste imperméable Brésil (Noir)",  image: "", dos: "", note: "4,87", avis: "351", stock: "8" },
+    { nom: "Veste imperméable Brésil (Beige)", image: "", dos: "", note: "5",    avis: "10",  stock: "8" },
+    { nom: "Veste imperméable Brésil (Bleu)",  image: "", dos: "", note: "4,88", avis: "176", stock: "8" },
+    { nom: "Veste imperméable Brésil (Jaune)", image: "", dos: "", note: "4.93", avis: "142", stock: "8" },
+    { nom: "Veste imperméable Brésil (Vert)",  image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png", dos: "", note: "4,92", avis: "323", stock: "8" },
+    { nom: "Veste imperméable Brésil (Rose)",  image: "", dos: "", note: "4,9",  avis: "214", stock: "8" },
     // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
   ],
 
@@ -365,28 +460,28 @@ const SITE = {
       texte: "Qualité impressionnante, rien à redire. Livraison en 3 jours, emballage soigné.",
       image: "https://i.postimg.cc/PxbnWxDj/IMG-6084.jpg"
     },
-        {
+    {
       nom: "Alex_U65 ",
       note: 5,
       verifie: false,
       texte: "Super content de ma veste Nike Brésil ! Livraison rapide, colis bien emballé, qualité au rendez-vous et conforme à l'annonce. Vendeur sérieux, je recommande !.",
       image: "https://i.postimg.cc/13gxWMFq/IMG-6083.jpg"
     },
-       {
+    {
       nom: "Marine donovan ",
       note: 5,
       verifie: false,
       texte: "Très bonne expérience. Produits arrivés intacts. Livraison en 9 jours, qualité finale très haute..",
       image: "https://i.postimg.cc/1tQL3QjW/IMG-6082.jpg"
     },
-       {
+    {
       nom: "Camille ",
       note: 5,
       verifie: false,
       texte: "Meilleur fournisseur testé. Tout arrivé en 2 jours",
       image: "https://i.postimg.cc/6qHScGpB/IMG-6081.jpg"
     },
-       {
+    {
       nom: "Maxime pro ",
       note: 5,
       verifie: false,
@@ -440,60 +535,152 @@ $("heroRate").innerHTML =
   `<span class="stars">${"★".repeat(nEt)}${"☆".repeat(5 - nEt)}</span> <b>${esc(H.note)}</b> <span style="color:var(--discret)">${H.nombreAvis ? "· " + esc(H.nombreAvis) : ""}</span>`;
 $("heroBtn").textContent = H.boutonCatalogue;
 
+/* ---------- prix ---------- */
+const OF = SITE.offre;
+const money = n => n.toFixed(2).replace(".", ",") + " " + SITE.devise;
+
+/* ---------- photos devant / derrière ---------- */
+let gal = [], gi = 0, cur = 0;
+function renderGal(){
+  const g = gal[gi];
+  if (!g) return;
+  $("galMain").innerHTML =
+    (g.image ? `<img src="${esc(g.image)}" alt="Veste ${esc(g.label)}">` : `<div class="gal-ph">Photo ${esc(String(g.label).toLowerCase())} ici</div>`) +
+    `<span class="gal-tag">${esc(g.label)}</span>`;
+  $("thumbs").innerHTML = gal.map((x, k) =>
+    `<button class="thumb${k === gi ? " on" : ""}" data-g="${k}" aria-label="${esc(x.label)}">` +
+    (x.image ? `<img src="${esc(x.image)}" alt="${esc(x.label)}">` : esc(x.label)) + `</button>`).join("");
+}
+$("thumbs").addEventListener("click", e => { const b = e.target.closest("[data-g]"); if (b) { gi = +b.dataset.g; renderGal(); } });
+
+/* ---------- livraison : date calculée automatiquement ---------- */
+const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+(function(){
+  const L = SITE.livraison, now = new Date();
+  const d1 = new Date(now), d2 = new Date(now);
+  d1.setDate(now.getDate() + L.joursMin); d2.setDate(now.getDate() + L.joursMax);
+  const txt = d1.getMonth() === d2.getMonth()
+    ? `${d1.getDate()} – ${d2.getDate()} ${MOIS[d2.getMonth()]}`
+    : `${d1.getDate()} ${MOIS[d1.getMonth()]} – ${d2.getDate()} ${MOIS[d2.getMonth()]}`;
+  $("livDates").textContent = txt;
+  $("livFree").textContent = "🚚 " + L.texte;
+})();
+
+/* ---------- offres ---------- */
+(function(){
+  const q = OF.packQte, normal = OF.unite * q, eco = normal - OF.pack;
+  const pct = Math.round(eco / normal * 100);
+  $("offers").innerHTML =
+    `<div class="offer"><div class="row"><b>1 veste</b><span class="pr">${money(OF.unite)}</span></div><small>Couleur et taille au choix</small></div>` +
+    `<div class="offer best"><span class="tag">MEILLEURE OFFRE · -${pct} %</span>` +
+    `<div class="row"><b>Pack ${q} vestes</b><span class="pr">${money(OF.pack)}<s>${money(normal)}</s></span></div>` +
+    `<small>Soit ${money(OF.pack / q)} la veste · tu économises ${money(eco)}</small></div>`;
+})();
+
+/* ---------- tailles ---------- */
+let taille = SITE.tailles.length > 1 ? SITE.tailles[1].t : SITE.tailles[0].t;   // S par défaut
+const infoTaille = t => SITE.tailles.find(x => x.t === t);
+function renderSizes(){
+  const html = SITE.tailles.map(x => `<button class="sz${x.t === taille ? " on" : ""}" data-sz="${esc(x.t)}">${esc(x.t)}</button>`).join("");
+  $("sizesFiche").innerHTML = html;
+  const i = infoTaille(taille);
+  $("sznoteFiche").innerHTML = `Taille <b>${esc(i.t)}</b> : idéale si tu fais ${esc(i.hauteur)} · ${esc(i.poids)}`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-sz]"); if (b) { taille = b.dataset.sz; renderSizes(); }
+  if (e.target.closest("[data-guide]")) openSize();
+});
+renderSizes();
+
+/* guide des tailles (tableau) */
+function renderSizeTable(){
+  const T = SITE.tailles;
+  $("sizeTable").innerHTML =
+    `<tr><th>Taille</th>${T.map(x => `<th>${esc(x.t)}</th>`).join("")}</tr>` +
+    `<tr><td>Poids</td>${T.map(x => `<td>${esc(x.poids)}</td>`).join("")}</tr>` +
+    `<tr><td>Hauteur</td>${T.map(x => `<td>${esc(x.hauteur)}</td>`).join("")}</tr>`;
+}
+renderSizeTable();
+const sizeSheet = $("sizeSheet");
+function openSize(){ sizeSheet.classList.add("open"); sizeSheet.setAttribute("aria-hidden","false"); sizeSheet.scrollTop = 0; }
+function closeSize(){ sizeSheet.classList.remove("open"); sizeSheet.setAttribute("aria-hidden","true"); }
+$("closeSize").onclick = closeSize;
+
 /* catalogue : s'ouvre sur la même page */
 $("t4").textContent = SITE.titre4; $("s4").textContent = SITE.soustitre4;
-const money = n => n.toFixed(2).replace(".", ",") + " " + SITE.devise;
 $("grid").innerHTML = SITE.produits.map((p, i) =>
   `<div class="prod">` +
-  (p.image ? `<img class="im" src="${esc(p.image)}" alt="${esc(p.nom)}">` : '<div class="im">🧱</div>') +
+  (p.image ? `<img class="im" src="${esc(p.image)}" alt="${esc(p.nom)}" data-open="${i}">` : `<div class="im" data-open="${i}">🧱</div>`) +
   (p.note ? `<div class="rt"><span class="stars">★★★★★</span> ${esc(p.note)}${p.avis ? " · " + esc(p.avis) + " avis" : ""}</div>` : "") +
-  `<h3>${esc(p.nom)}</h3><div class="pr grad">${money(+p.prix)}</div>` +
+  `<h3>${esc(p.nom)}</h3><div class="pr">${money(OF.unite)}</div><div class="also">ou ${OF.packQte} pour ${money(OF.pack)}</div>` +
   (p.stock ? `<div class="st">Plus que ${esc(p.stock)} en stock</div>` : "") +
-  `<button class="add" data-add="${i}">+ Ajouter au panier</button></div>`).join("");
+  `<button class="add" data-open="${i}">Choisir ma taille</button></div>`).join("");
+
+/* fiche d'une veste : s'ouvre quand on la choisit */
+const prodSheet = $("prodSheet");
+function openProd(i){
+  cur = i; const p = SITE.produits[i];
+  gal = [{ label: "Devant", image: p.image }, { label: "Derrière", image: p.dos }]; gi = 0;
+  $("prodTitle").textContent = p.nom;
+  renderGal(); renderSizes();
+  prodSheet.classList.add("open"); prodSheet.setAttribute("aria-hidden","false"); prodSheet.scrollTop = 0;
+}
+function closeProd(){ prodSheet.classList.remove("open"); prodSheet.setAttribute("aria-hidden","true"); }
+$("closeProd").onclick = closeProd;
+$("grid").addEventListener("click", e => { const b = e.target.closest("[data-open]"); if (b) openProd(+b.dataset.open); });
+$("addProd").onclick = () => {
+  const k = cur + "|" + taille; cart[k] = (cart[k] || 0) + 1; majCompteur();
+  const b = $("addProd"); b.textContent = "Ajouté ✓ (taille " + taille + ")"; setTimeout(() => b.textContent = "Ajouter au panier", 1100);
+};
+$("seeCart").onclick = () => openCart();
 const sheet = $("sheet");
 const openSheet = e => { if (e) e.preventDefault(); sheet.classList.add("open"); sheet.setAttribute("aria-hidden","false"); sheet.scrollTop = 0; document.body.style.overflow = "hidden"; };
 const closeSheet = () => { sheet.classList.remove("open"); sheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; };
 $("heroBtn").onclick = openSheet;
 $("closeSheet").onclick = closeSheet;
-document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); closeCart(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSize(); closeProd(); closeSheet(); closeCart(); } });
 
 /* ---------- panier ---------- */
-const cart = {};                       // numéro du produit -> quantité
+const cart = {};                       // "numéro|taille" -> quantité
 const cartSheet = $("cartSheet"), cartView = $("cartView");
 let client = {};
 const nbArticles = () => Object.values(cart).reduce((a, b) => a + b, 0);
-const total = () => Object.keys(cart).reduce((s, i) => s + cart[i] * +SITE.produits[i].prix, 0);
+const sousTotal = () => nbArticles() * OF.unite;
+const total = () => {                  // 3 pour 39.99 appliqué automatiquement
+  const n = nbArticles();
+  return Math.floor(n / OF.packQte) * OF.pack + (n % OF.packQte) * OF.unite;
+};
+const remise = () => Math.max(0, sousTotal() - total());
+const parse = k => { const [i, t] = k.split("|"); return { p: SITE.produits[+i], t }; };
 function majCompteur(){
   const n = nbArticles();
   ["cnt1", "cnt2"].forEach(id => { $(id).textContent = n; $(id).style.display = n ? "flex" : "none"; });
 }
-function openCart(){ closeSheet(); renderCart(); cartSheet.classList.add("open"); cartSheet.setAttribute("aria-hidden","false"); cartSheet.scrollTop = 0; document.body.style.overflow = "hidden"; }
+function openCart(){ closeProd(); closeSheet(); renderCart(); cartSheet.classList.add("open"); cartSheet.setAttribute("aria-hidden","false"); cartSheet.scrollTop = 0; document.body.style.overflow = "hidden"; }
 function closeCart(){ cartSheet.classList.remove("open"); cartSheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; }
 $("cartBtn").onclick = openCart; $("cartBtn2").onclick = openCart; $("closeCart").onclick = closeCart;
 
-$("grid").addEventListener("click", e => {
-  const b = e.target.closest("[data-add]"); if (!b) return;
-  const i = +b.dataset.add; cart[i] = (cart[i] || 0) + 1; majCompteur();
-  b.textContent = "Ajouté ✓"; setTimeout(() => b.textContent = "+ Ajouter au panier", 900);
-});
-
 function recapTexte(){
-  const lignes = Object.keys(cart).map(i => `${cart[i]} x ${SITE.produits[i].nom} — ${money(cart[i] * +SITE.produits[i].prix)}`);
-  return "Commande " + SITE.marque + "\n\n" + lignes.join("\n") + "\n\nTotal : " + money(total()) +
+  const lignes = Object.keys(cart).map(k => { const { p, t } = parse(k); return `${cart[k]} x ${p.nom} — Taille ${t} — ${money(cart[k] * OF.unite)}`; });
+  return "Commande " + SITE.marque + "\n\n" + lignes.join("\n") +
+    (remise() > 0 ? "\n\nOffre " + OF.packQte + " pour " + money(OF.pack) + " : -" + money(remise()) : "") +
+    "\n\nTotal : " + money(total()) +
     "\n\nPrénom : " + client.prenom + "\nNom : " + client.nom + "\nTéléphone : " + client.tel + "\nAdresse : " + client.adresse;
 }
 
 function renderCart(){
   $("cartTitle").textContent = "Ton panier";
-  const ids = Object.keys(cart);
-  if (!ids.length) { cartView.innerHTML = '<p class="vide">Ton panier est vide.</p>'; return; }
-  cartView.innerHTML = ids.map(i => {
-    const p = SITE.produits[i];
-    return `<div class="line"><div><b>${esc(p.nom)}</b><small>${money(+p.prix)} l'unité</small></div>
-      <div class="qty"><button data-act="dec" data-i="${i}">−</button><span>${cart[i]}</span><button data-act="inc" data-i="${i}">+</button></div>
-      <div><b>${money(cart[i] * +p.prix)}</b><small><a href="#" data-act="del" data-i="${i}" style="color:var(--discret)">Retirer</a></small></div></div>`;
+  const ks = Object.keys(cart);
+  if (!ks.length) { cartView.innerHTML = '<p class="vide">Ton panier est vide.</p>'; return; }
+  cartView.innerHTML = ks.map(k => {
+    const { p, t } = parse(k);
+    return `<div class="line"><div><b>${esc(p.nom)}</b><small>Taille ${esc(t)} · ${money(OF.unite)} l'unité</small></div>
+      <div class="qty"><button data-act="dec" data-i="${esc(k)}">−</button><span>${cart[k]}</span><button data-act="inc" data-i="${esc(k)}">+</button></div>
+      <div><b>${money(cart[k] * OF.unite)}</b><small><a href="#" data-act="del" data-i="${esc(k)}" style="color:var(--discret)">Retirer</a></small></div></div>`;
   }).join("") +
+  (remise() > 0 ? `<div class="promo"><span>Offre ${OF.packQte} pour ${money(OF.pack)}</span><span>-${money(remise())}</span></div>` : "") +
   `<div class="tot"><span>Total</span><span class="grad">${money(total())}</span></div>
+   <p class="note" style="margin:-6px 0 16px">🚚 ${esc(SITE.livraison.texte)}${nbArticles() < OF.packQte ? " · Ajoute " + (OF.packQte - nbArticles()) + " veste(s) pour profiter de " + OF.packQte + " à " + money(OF.pack) : ""}</p>
    <button class="btn main" data-act="pay">Payer</button>`;
 }
 

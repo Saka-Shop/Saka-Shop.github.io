@@ -129,6 +129,8 @@ footer{max-width:640px;margin:70px auto 0;padding:30px 20px;text-align:center;co
 .prod .im{aspect-ratio:1/1;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
 .prod h3{font-size:16px;margin:12px 4px 2px}
 .prod .pr{margin:0 4px 6px;font-weight:700}
+.prod .rt{margin:12px 4px 0;font-size:13px;color:var(--discret)}
+.prod .st{margin:0 4px 6px;font-size:13px;color:var(--accent2)}
 /* panier */
 .cartbtn{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
 .cnt{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--grad);color:var(--surAccent);font-size:12px;font-weight:800;display:none;align-items:center;justify-content:center}
@@ -332,14 +334,15 @@ const SITE = {
      7) LE CATALOGUE (s'ouvre quand on appuie sur le gros bouton)
      prix = juste un nombre, sans le symbole € (ex: 12.5 pour 12,50 €)
      image = nom de ta photo (ex: "produit1.jpg"), vide = petite brique 🧱
+     note / avis / stock = laisse "" tant que tu n'as pas de vrais chiffres (rien ne s'affiche)
      ────────────────────────────────────────────── */
   titre4: "Le catalogue",                 // Titre en haut du catalogue
   soustitre4: "Ton sous-titre ici.",      // Petit texte sous le titre
   produits: [
-    { nom: "Produit 1", prix: 10, image: "" },
-    { nom: "Produit 2", prix: 15, image: "" },
-    { nom: "Produit 3", prix: 20, image: "" },
-    { nom: "Produit 4", prix: 25, image: "" }
+    { nom: "Veste imperméable Brésil (Noir)", prix: 14.95, image: "", note: "", avis: "", stock: "" },
+    { nom: "Veste imperméable Brésil (Beige)", prix: 14.95, image: "", note: "", avis: "", stock: "" },
+    { nom: "Veste imperméable Brésil (Bleu)", prix: 14.95, image: "", note: "", avis: "", stock: "" },
+    { nom: "Veste imperméable Brésil (Jaune)", prix: 14.95, image: "", note: "", avis: "", stock: "" }
     // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
   ],
 
@@ -441,7 +444,9 @@ const money = n => n.toFixed(2).replace(".", ",") + " " + SITE.devise;
 $("grid").innerHTML = SITE.produits.map((p, i) =>
   `<div class="prod">` +
   (p.image ? `<img class="im" src="${esc(p.image)}" alt="${esc(p.nom)}">` : '<div class="im">🧱</div>') +
+  (p.note ? `<div class="rt"><span class="stars">★★★★★</span> ${esc(p.note)}${p.avis ? " · " + esc(p.avis) + " avis" : ""}</div>` : "") +
   `<h3>${esc(p.nom)}</h3><div class="pr grad">${money(+p.prix)}</div>` +
+  (p.stock ? `<div class="st">Plus que ${esc(p.stock)} en stock</div>` : "") +
   `<button class="add" data-add="${i}">+ Ajouter au panier</button></div>`).join("");
 const sheet = $("sheet");
 const openSheet = e => { if (e) e.preventDefault(); sheet.classList.add("open"); sheet.setAttribute("aria-hidden","false"); sheet.scrollTop = 0; document.body.style.overflow = "hidden"; };

@@ -425,7 +425,7 @@ const H = SITE.hero;
 $("heroImg").innerHTML = H.image
   ? `<img class="hv-img" src="${esc(H.image)}" alt="">`
   : '<div class="hv-img hv-ph">Ta photo ici</div>';
-$("b1").innerHTML = `<b>${esc(H.badge1.titre)}</b><span>${esc(H.badge1.texte)}</span>`;
+if (H.badge1) { $("b1").innerHTML = `<b>${esc(H.badge1.titre)}</b><span>${esc(H.badge1.texte)}</span>`; } else { $("b1").style.display = "none"; }
 $("b2").innerHTML = `<b>${esc(H.badge2.titre)}</b><span>${esc(H.badge2.texte)}</span>`;
 $("h1a").textContent = H.ligne1; $("h1b").textContent = H.ligne2; $("h1c").textContent = H.ligne3;
 $("heroViewers").textContent = H.personnesEnLigne ? "👁 " + H.personnesEnLigne : "";

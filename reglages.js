@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fond:#0e0c1b; --carte:#1a1730; --texte:#f6f3ff; --discret:#a29fc0;
+  --accent:#ff6a3d; --accent2:#ffcf3f; --surAccent:#1b0f10;
+  --grad:linear-gradient(135deg,var(--accent),var(--accent2));
+  --ligne:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--fond);color:var(--texte);padding-bottom:20px;overflow-x:hidden;line-height:1.5}
+h1,h2,h3,.brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.035em}
+a{color:inherit}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(110px);opacity:.28;pointer-events:none;z-index:0}
+.g1{background:var(--accent);top:-120px;right:-160px}
+.g2{background:#6a4dff;bottom:10%;left:-200px}
+main,header,footer{position:relative;z-index:1}
+
+/* header */
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(14,12,27,.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--ligne)}
+.brand{font-size:22px;text-transform:uppercase}
+.brand b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mini{font-size:14px;font-weight:600;text-decoration:none;padding:9px 16px;border-radius:999px;border:1px solid var(--ligne);background:rgba(255,255,255,.05)}
+
+/* hero */
+.hero{max-width:640px;margin:0 auto;padding:30px 20px 10px}
+.hv{position:relative;padding:44px 0;margin-bottom:28px}
+.hv-panel{position:absolute;left:2%;right:2%;top:14px;bottom:14px;background:var(--grad);border-radius:48px 48px 48px 100px;transform:rotate(-6deg);box-shadow:0 30px 80px -20px var(--accent)}
+.hv-panel:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.35),transparent 55%)}
+.hv-img{position:relative;display:block;width:72%;aspect-ratio:3/4;margin:0 auto;object-fit:cover;border-radius:28px;background:var(--carte);box-shadow:0 25px 50px rgba(0,0,0,.45);animation:float 6s ease-in-out infinite}
+.hv-ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--discret);font-weight:600}
+.badge{position:absolute;padding:12px 16px;border-radius:20px;background:rgba(20,16,40,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);font-size:13px;line-height:1.3;animation:float 5s ease-in-out infinite}
+.badge b{display:block;font-size:15px}
+.badge span{color:var(--discret)}
+.b1{top:6px;left:-4px}
+.b2{right:-4px;bottom:70px;animation-delay:-2.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero h1{font-size:clamp(38px,11vw,62px);line-height:1.02}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .meta{color:var(--discret);margin-top:18px}
+.hero .rate{margin-top:10px;font-size:18px}
+.stars{color:var(--accent2);letter-spacing:2px}
+.btns{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:19px;padding:19px;border-radius:20px;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.main{background:var(--grad);color:var(--surAccent);box-shadow:0 14px 34px -10px var(--accent)}
+.btn.ghost{border:1px solid var(--ligne);background:rgba(255,255,255,.04);color:var(--texte)}
+
+/* ticker */
+.ticker{margin:40px 0 10px;overflow:hidden;border-block:1px solid var(--ligne);background:rgba(255,255,255,.03);padding:16px 0}
+.track{display:flex;gap:46px;width:max-content;animation:scroll 22s linear infinite;font-weight:600;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* sections */
+section{max-width:640px;margin:0 auto;padding:64px 20px 10px;text-align:center}
+.pill{display:inline-block;padding:8px 18px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--ligne);font-size:14px;font-weight:600;margin-bottom:20px}
+.pill:before{content:"✦ ";color:var(--accent)}
+h2{font-size:clamp(30px,8.4vw,46px);line-height:1.05}
+.sub{color:var(--discret);margin:14px 0 32px;font-size:17px}
+
+/* cartes + flèches */
+.card{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--ligne);border-radius:32px;padding:32px 28px;text-align:left;min-height:250px;touch-action:pan-y}
+.card.in{animation:slide .35s ease}
+@keyframes slide{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.ico{width:68px;height:68px;border-radius:22px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:20px;transform:rotate(-6deg)}
+.card h3{font-size:26px;margin-bottom:10px}
+.card p{color:var(--discret);font-size:17px}
+.nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:28px}
+.nav button{width:52px;height:52px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-appearance:none;appearance:none}
+.nav button:active{background:var(--grad);color:var(--surAccent)}
+.nav svg{width:22px;height:22px}
+.dots{display:flex;gap:9px;align-items:center}
+.dots i{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.2);transition:all .25s;cursor:pointer}
+.dots i.on{width:28px;background:var(--grad)}
+
+/* tableau */
+.tbl{background:rgba(255,255,255,.04);border:1px solid var(--ligne);border-radius:32px;padding:8px 10px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{font-family:'Bricolage Grotesque';font-size:19px;padding:20px 4px 14px}
+th.us{color:var(--accent2)}
+td{padding:18px 4px;border-top:1px solid var(--ligne)}
+td:first-child{text-align:left;padding-left:12px;font-weight:500}
+td.us{background:rgba(255,255,255,.05)}
+.ok,.no{display:inline-flex;width:44px;height:44px;border-radius:50%;align-items:center;justify-content:center;font-weight:800;font-size:19px}
+.ok{background:var(--grad);color:var(--surAccent)}
+.no{background:rgba(255,255,255,.08);color:var(--discret)}
+
+/* catalogue */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.prod{background:var(--carte);border:1px solid var(--ligne);border-radius:24px;padding:10px;text-decoration:none;display:block;transition:transform .2s}
+.prod:active{transform:scale(.97)}
+.prod .im{aspect-ratio:1/1;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
+.prod h3{font-size:16px;margin:12px 4px 2px}
+.prod .pr{margin:0 4px 6px;font-weight:700}
+
+/* avis */
+.rev{padding:14px;overflow:hidden}
+.rev img{width:100%;height:auto;max-height:480px;display:block;object-fit:cover;border-radius:22px}
+.rev .body{padding:20px 12px 10px}
+.rev .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rev .name{font-family:'Bricolage Grotesque';font-weight:800;font-size:21px}
+.ver{color:var(--accent2);font-weight:600;margin:10px 0 6px;font-size:15px}
+.rev p{color:var(--discret);font-size:17px;margin-top:8px}
+
+footer{max-width:640px;margin:70px auto 0;padding:30px 20px;text-align:center;color:var(--discret);font-size:14px;border-top:1px solid var(--ligne)}
+
+/* barre fixe */
+.cta{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(14,12,27,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ligne)}
+.cta a{display:block;max-width:640px;margin:0 auto;text-align:center;text-decoration:none;font-weight:700;font-size:19px;padding:16px;border-radius:999px;background:var(--grad);color:var(--surAccent)}
+
+/* apparition au scroll */
+/* catalogue (panneau qui s'ouvre sur la même page) */
+.sheet{position:fixed;left:0;right:0;top:0;bottom:0;z-index:50;background:var(--fond);overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s .45s}
+.sheet.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.sheet-in{max-width:640px;margin:0 auto;padding:24px 20px 60px}
+.sheet-top{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left}
+.sheet-top h2{font-size:clamp(28px,8vw,40px)}
+.x{width:46px;height:46px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.07);color:var(--texte);font-size:18px;flex:none;cursor:pointer}
+.sheet .sub{text-align:left;margin:10px 0 24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.prod{background:var(--carte);border:1px solid var(--ligne);border-radius:24px;padding:10px;text-decoration:none;display:block;transition:transform .2s}
+.prod:active{transform:scale(.97)}
+.prod .im{aspect-ratio:1/1;border-radius:16px;background:rgba(255,255,255,.06);object-fit:cover;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
+.prod h3{font-size:16px;margin:12px 4px 2px}
+.prod .pr{margin:0 4px 6px;font-weight:700}
+/* panier */
+.cartbtn{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.cnt{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--grad);color:var(--surAccent);font-size:12px;font-weight:800;display:none;align-items:center;justify-content:center}
+.add{width:100%;margin-top:8px;padding:12px;border-radius:14px;border:0;background:var(--grad);color:var(--surAccent);font-weight:700;font-size:14px;cursor:pointer}
+.line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid var(--ligne);text-align:left}
+.line b{display:block}.line small{color:var(--discret)}
+.qty{display:flex;align-items:center;gap:10px;font-weight:700}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.07);color:var(--texte);font-size:18px;cursor:pointer}
+.tot{display:flex;justify-content:space-between;font-size:20px;font-weight:700;padding:20px 0}
+.note{color:var(--discret);font-size:14px;margin-top:18px;text-align:left}
+.vide{color:var(--discret);padding:40px 0}
+.inp{display:block;width:100%;padding:16px;border-radius:16px;border:1px solid var(--ligne);background:rgba(255,255,255,.06);color:var(--texte);font:inherit;font-size:16px;margin-top:12px;-webkit-appearance:none;appearance:none}
+.inp::placeholder{color:var(--discret)}
+.btn{border:0;width:100%;cursor:pointer;font-family:inherit}
+.link{background:none;border:0;color:var(--discret);text-decoration:underline;margin-top:14px;font:inherit;cursor:pointer}
+pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);border:1px solid var(--ligne);border-radius:18px;padding:16px;font:inherit;font-size:15px;color:var(--texte)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+
+<header>
+  <div class="brand" id="brand"></div>
+  <button class="cartbtn" id="cartBtn" aria-label="Panier"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span class="cnt" id="cnt1">0</span></button>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hv">
+      <div class="hv-panel"></div>
+      <div id="heroImg"></div>
+      <div class="badge b1" id="b1"></div>
+      <div class="badge b2" id="b2"></div>
+    </div>
+    <h1><span id="h1a"></span><br><span class="grad" id="h1b"></span><br><span id="h1c"></span></h1>
+    <p class="meta" id="heroViewers"></p>
+    <p class="rate" id="heroRate"></p>
+    <div class="btns">
+      <a class="btn main" id="heroBtn" href="#"></a>
+    </div>
+  </div>
+
+  <div class="ticker"><div class="track" id="track"></div></div>
+
+  <section class="rv">
+    <h2 id="t1"></h2>
+    <p class="sub" id="s1"></p>
+    <div class="card" id="featCard"></div>
+    <div class="nav" id="featNav"></div>
+  </section>
+
+  <section class="rv">
+    <div class="pill">Comparaison</div>
+    <h2 id="t2"></h2>
+    <p class="sub" id="s2"></p>
+    <div class="tbl"><table id="cmp"></table></div>
+  </section>
+
+  <section class="rv" id="avis">
+    <div class="pill">Avis</div>
+    <h2 id="t3"></h2>
+    <p class="sub" id="s3"></p>
+    <div class="card rev" id="revCard"></div>
+    <div class="nav" id="revNav"></div>
+  </section>
+</main>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="sheet-in">
+    <div class="sheet-top"><h2 id="t4"></h2>
+      <div style="display:flex;gap:10px;flex:none">
+        <button class="cartbtn" id="cartBtn2" aria-label="Panier"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span class="cnt" id="cnt2">0</span></button>
+        <button class="x" id="closeSheet" aria-label="Fermer">✕</button>
+      </div>
+    </div>
+    <p class="sub" id="s4"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<div class="sheet" id="cartSheet" aria-hidden="true">
+  <div class="sheet-in">
+    <div class="sheet-top"><h2 id="cartTitle">Ton panier</h2><button class="x" id="closeCart" aria-label="Fermer">✕</button></div>
+    <div id="cartView"></div>
+  </div>
+</div>
+
+<footer id="foot"></footer>
+
+<script>
+/* ============================================================
+   ✏️  RÉGLAGES DE TON SITE — c'est le SEUL fichier à modifier
+   ============================================================
+
+   COMMENT MODIFIER (simple) :
+   • Change uniquement le texte qui est entre des guillemets "comme ça".
+   • Ne supprime jamais les guillemets " " ni les virgules , à la fin des lignes.
+   • Ce qui est après // est juste une explication, tu peux l'ignorer.
+   • Pour AJOUTER un élément (produit, avis, carte...) : copie une ligne
+     { ... }, colle-la juste en dessous et change le texte.
+   • Pour SUPPRIMER un élément : efface toute sa ligne { ... },
+   • Les photos : envoie-les sur GitHub (Add file → Upload files), puis écris
+     leur nom ici, par exemple "accueil.jpg".
+
+   Si le site devient vide ou affiche une erreur en rouge, c'est qu'une
+   virgule ou un guillemet a été effacé : regarde la ligne que tu viens de changer.
+   ============================================================ */
+
+const SITE = {
+
+  /* ──────────────────────────────────────────────
+     1) À REMPLIR EN PREMIER (très important)
+     ────────────────────────────────────────────── */
+  marque: "S Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
+  paypalMe: "",                 // Ton pseudo PayPal.me. Si ton lien est paypal.me/clement, écris "clement".
+                                // Sans ça, le bouton « Valider et payer » n'ouvre pas PayPal.
+  emailCommande: "",            // (facultatif) ton e-mail, pour que le client t'envoie sa commande
+  devise: "€",                  // Le symbole de la monnaie
+  messagePaiement: "Paiement via PayPal, option « Amis proche » (protection de l'acheteur incluse).",
+                                // Le message affiché sous le formulaire de commande
+
+
+  /* ──────────────────────────────────────────────
+     2) COULEURS (tout le site change d'un coup)
+     Écris des codes couleur comme "#ff0000" (rouge).
+     Astuce : cherche « color picker » sur Google pour trouver un code.
+     ────────────────────────────────────────────── */
+  couleurs: {
+    fond:      "#0e0c1b",       // Couleur du fond de toute la page
+    carte:     "#1a1730",       // Couleur du fond des cartes et des produits
+    texte:     "#f6f3ff",       // Couleur du texte principal
+    discret:   "#a29fc0",       // Couleur des petits textes gris
+    accent:    "#ff6a3d",       // Couleur 1 des boutons (début du dégradé)
+    accent2:   "#ffcf3f",       // Couleur 2 des boutons (fin du dégradé)
+    surAccent: "#1b0f10"        // Couleur du texte écrit sur les boutons colorés
+  },
+
+
+  /* ──────────────────────────────────────────────
+     3) HAUT DE PAGE (la première chose qu'on voit)
+     ────────────────────────────────────────────── */
+  hero: {
+    image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png",                  // TA photo au milieu du carré en couleur. Ex: "accueil.jpg". Vide = cadre « Ta photo ici ».
+    ligne1: "la veste que tout le monde va te demander",     // Gros titre, ligne 1 (en blanc)
+    ligne2: "premium quality",   // Gros titre, ligne 2 (en couleur)
+    ligne3: "petit prix",     // Gros titre, ligne 3 (en blanc)
+
+    badge1: { titre: "⚡ stok limité ", texte: "1:1" },   // Petite bulle en haut à gauche de la photo
+    badge2: { titre: "📦 livraison 1-5j ", texte: "livraison gratuit" },   // Petite bulle à droite de la photo
+
+    personnesEnLigne: "7",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
+    note: "4.8/5",              // Ta VRAIE note, ex: "4,8/5". Les étoiles s'adaptent toutes seules.
+    nombreAvis: "2780 avis",      // Ton VRAI nombre d'avis, ex: "12 avis"
+
+    boutonCatalogue: "Afficher le catalogue"   // Le texte du gros bouton qui ouvre le catalogue
+  },
+
+
+  /* ──────────────────────────────────────────────
+     4) BANDEAU NOIR QUI DÉFILE (sous le haut de page)
+     Un texte par guillemets, séparés par des virgules. Tu peux mettre un emoji au début.
+     ────────────────────────────────────────────── */
+  bandeau: ["⚡ stoke limité", "📦 livraison 1-5j", "🔒 paiement sécurisé ", "✨ Qualité garantie"],
+
+
+  /* ──────────────────────────────────────────────
+     5) LES CARTES AVEC FLÈCHES
+     ────────────────────────────────────────────── */
+  titre1: "Tout ce dont tu as besoin",    // Titre au-dessus des cartes
+  soustitre1: "Everything you need.",      // Petit texte sous le titre
+  cartes: [
+    // icone = un emoji, titre = le titre de la carte, texte = la phrase en dessous
+    { icone: "🏆", titre: "Qualité premium garantie", texte: "Des vestes authentiques, vérifiés et en parfait état.." },
+    { icone: "📦", titre: "Livraison ultra-rapide", texte: "réception en 1 à 5 jours ouvrés." },
+    { icone: "🌍", titre: "Fournisseur international", texte: "Accès à un réseau mondial de qualité.." }
+    // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
+  ],
+
+
+  /* ──────────────────────────────────────────────
+     6) LE TABLEAU « POURQUOI NOUS ? »
+     nous: true = ✓ pour toi  |  false = ✕ pour toi
+     autre: true = ✓ pour les autres  |  false = ✕ pour les autres
+     ────────────────────────────────────────────── */
+  titre2: "Pourquoi nous ?",              // Titre du tableau
+  soustitre2: "Parce que nos vestes sont les meilleurs..",      // Petit texte sous le titre
+  colNous: "Nous",                        // Nom de ta colonne
+  colAutre: "Autre",                      // Nom de la colonne des concurrents
+  lignes: [
+    { critere: "Bas prix",       nous: true,  autre: false },
+    { critere: "Qualité",        nous: true,  autre: true  },
+    { critere: "livraison en 1-5j",  nous: true,  autre: false },
+    { critere: "Stock limité", nous: false, autre: true  }
+  ],
+
+
+  /* ──────────────────────────────────────────────
+     7) LE CATALOGUE (s'ouvre quand on appuie sur le gros bouton)
+     prix = juste un nombre, sans le symbole € (ex: 12.5 pour 12,50 €)
+     image = nom de ta photo (ex: "produit1.jpg"), vide = petite brique 🧱
+     ────────────────────────────────────────────── */
+  titre4: "Le catalogue",                 // Titre en haut du catalogue
+  soustitre4: "Ton sous-titre ici.",      // Petit texte sous le titre
+  produits: [
+    { nom: "Produit 1", prix: 10, image: "" },
+    { nom: "Produit 2", prix: 15, image: "" },
+    { nom: "Produit 3", prix: 20, image: "" },
+    { nom: "Produit 4", prix: 25, image: "" }
+    // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
+  ],
+
+
+  /* ──────────────────────────────────────────────
+     8) LES AVIS CLIENTS (mets de VRAIS avis)
+     note = de 1 à 5
+     verifie: true seulement si tu as vraiment vérifié que la personne a acheté
+     image = vraie photo envoyée par le client (ex: "avis1.jpg"), vide = pas de photo
+     ────────────────────────────────────────────── */
+  titre3: "Ce que disent nos clients",    // Titre de la section avis
+  soustitre3: "What our customers say..",      // Petit texte sous le titre
+  avis: [
+    {
+      nom: "Julien mir ",
+      note: 5,
+      verifie: false,
+      texte: "Qualité impressionnante, rien à redire. Livraison en 3 jours, emballage soigné.",
+      image: ""
+    },
+        {
+      nom: "Alex_U65 ",
+      note: 5,
+      verifie: false,
+      texte: "Super content de ma veste Nike Brésil ! Livraison rapide, colis bien emballé, qualité au rendez-vous et conforme à l'annonce. Vendeur sérieux, je recommande !.",
+      image: ""
+    },
+       {
+      nom: "Marine donovan ",
+      note: 5,
+      verifie: false,
+      texte: "Très bonne expérience. Produits arrivés intacts. Livraison en 9 jours, qualité finale très haute..",
+      image: ""
+    },
+       {
+      nom: "Camille ",
+      note: 5,
+      verifie: false,
+      texte: "Meilleur fournisseur testé. Tout arrivé en 2 jours",
+      image: ""
+    },
+       {
+      nom: "Maxime pro ",
+      note: 5,
+      verifie: false,
+      texte: "Parfait de A à Z. Délai respecté (3 jours)",
+      image: ""
+    },
+
+    // pour en ajouter un : copie tout le bloc { ... }, mets une virgule après le }
+    // du bloc précédent, et change le texte
+  ],
+
+
+  /* ──────────────────────────────────────────────
+     9) BAS DE PAGE
+     ────────────────────────────────────────────── */
+  piedDePage:
+};
+
+</script>
+<script>
+
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* couleurs */
+const C = SITE.couleurs, root = document.documentElement.style;
+Object.keys(C).forEach(k => root.setProperty("--" + k, C[k]));
+
+/* textes simples */
+document.title = SITE.marque;
+$("brand").innerHTML = esc(SITE.marque);
+$("t1").textContent = SITE.titre1; $("s1").textContent = SITE.soustitre1;
+$("t2").innerHTML = esc(SITE.titre2).replace(/\*(.+?)\*/g, '<span class="grad">$1</span>');
+$("s2").textContent = SITE.soustitre2;
+$("t3").textContent = SITE.titre3; $("s3").textContent = SITE.soustitre3;
+$("foot").textContent = SITE.piedDePage;
+
+/* accueil */
+const H = SITE.hero;
+$("heroImg").innerHTML = H.image
+  ? `<img class="hv-img" src="${esc(H.image)}" alt="">`
+  : '<div class="hv-img hv-ph">Ta photo ici</div>';
+$("b1").innerHTML = `<b>${esc(H.badge1.titre)}</b><span>${esc(H.badge1.texte)}</span>`;
+$("b2").innerHTML = `<b>${esc(H.badge2.titre)}</b><span>${esc(H.badge2.texte)}</span>`;
+$("h1a").textContent = H.ligne1; $("h1b").textContent = H.ligne2; $("h1c").textContent = H.ligne3;
+$("heroViewers").textContent = H.personnesEnLigne ? "👁 " + H.personnesEnLigne : "";
+$("heroViewers").style.display = H.personnesEnLigne ? "" : "none";
+const nEt = Math.min(5, Math.max(0, Math.round(parseFloat(String(H.note).replace(",", ".")) || 5)));
+$("heroRate").innerHTML =
+  `<span class="stars">${"★".repeat(nEt)}${"☆".repeat(5 - nEt)}</span> <b>${esc(H.note)}</b> <span style="color:var(--discret)">${H.nombreAvis ? "· " + esc(H.nombreAvis) : ""}</span>`;
+$("heroBtn").textContent = H.boutonCatalogue;
+
+/* catalogue : s'ouvre sur la même page */
+$("t4").textContent = SITE.titre4; $("s4").textContent = SITE.soustitre4;
+const money = n => n.toFixed(2).replace(".", ",") + " " + SITE.devise;
+$("grid").innerHTML = SITE.produits.map((p, i) =>
+  `<div class="prod">` +
+  (p.image ? `<img class="im" src="${esc(p.image)}" alt="${esc(p.nom)}">` : '<div class="im">🧱</div>') +
+  `<h3>${esc(p.nom)}</h3><div class="pr grad">${money(+p.prix)}</div>` +
+  `<button class="add" data-add="${i}">+ Ajouter au panier</button></div>`).join("");
+const sheet = $("sheet");
+const openSheet = e => { if (e) e.preventDefault(); sheet.classList.add("open"); sheet.setAttribute("aria-hidden","false"); sheet.scrollTop = 0; document.body.style.overflow = "hidden"; };
+const closeSheet = () => { sheet.classList.remove("open"); sheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; };
+$("heroBtn").onclick = openSheet;
+$("closeSheet").onclick = closeSheet;
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); closeCart(); } });
+
+/* ---------- panier ---------- */
+const cart = {};                       // numéro du produit -> quantité
+const cartSheet = $("cartSheet"), cartView = $("cartView");
+let client = {};
+const nbArticles = () => Object.values(cart).reduce((a, b) => a + b, 0);
+const total = () => Object.keys(cart).reduce((s, i) => s + cart[i] * +SITE.produits[i].prix, 0);
+function majCompteur(){
+  const n = nbArticles();
+  ["cnt1", "cnt2"].forEach(id => { $(id).textContent = n; $(id).style.display = n ? "flex" : "none"; });
+}
+function openCart(){ closeSheet(); renderCart(); cartSheet.classList.add("open"); cartSheet.setAttribute("aria-hidden","false"); cartSheet.scrollTop = 0; document.body.style.overflow = "hidden"; }
+function closeCart(){ cartSheet.classList.remove("open"); cartSheet.setAttribute("aria-hidden","true"); document.body.style.overflow = ""; }
+$("cartBtn").onclick = openCart; $("cartBtn2").onclick = openCart; $("closeCart").onclick = closeCart;
+
+$("grid").addEventListener("click", e => {
+  const b = e.target.closest("[data-add]"); if (!b) return;
+  const i = +b.dataset.add; cart[i] = (cart[i] || 0) + 1; majCompteur();
+  b.textContent = "Ajouté ✓"; setTimeout(() => b.textContent = "+ Ajouter au panier", 900);
+});
+
+function recapTexte(){
+  const lignes = Object.keys(cart).map(i => `${cart[i]} x ${SITE.produits[i].nom} — ${money(cart[i] * +SITE.produits[i].prix)}`);
+  return "Commande " + SITE.marque + "\n\n" + lignes.join("\n") + "\n\nTotal : " + money(total()) +
+    "\n\nPrénom : " + client.prenom + "\nNom : " + client.nom + "\nTéléphone : " + client.tel + "\nAdresse : " + client.adresse;
+}
+
+function renderCart(){
+  $("cartTitle").textContent = "Ton panier";
+  const ids = Object.keys(cart);
+  if (!ids.length) { cartView.innerHTML = '<p class="vide">Ton panier est vide.</p>'; return; }
+  cartView.innerHTML = ids.map(i => {
+    const p = SITE.produits[i];
+    return `<div class="line"><div><b>${esc(p.nom)}</b><small>${money(+p.prix)} l'unité</small></div>
+      <div class="qty"><button data-act="dec" data-i="${i}">−</button><span>${cart[i]}</span><button data-act="inc" data-i="${i}">+</button></div>
+      <div><b>${money(cart[i] * +p.prix)}</b><small><a href="#" data-act="del" data-i="${i}" style="color:var(--discret)">Retirer</a></small></div></div>`;
+  }).join("") +
+  `<div class="tot"><span>Total</span><span class="grad">${money(total())}</span></div>
+   <button class="btn main" data-act="pay">Payer</button>`;
+}
+
+function renderForm(){
+  $("cartTitle").textContent = "Tes informations";
+  cartView.innerHTML =
+  `<form id="coForm" style="text-align:left">
+    <input class="inp" name="prenom" placeholder="Prénom" autocomplete="given-name" required value="${esc(client.prenom)}">
+    <input class="inp" name="nom" placeholder="Nom" autocomplete="family-name" required value="${esc(client.nom)}">
+    <input class="inp" name="tel" type="tel" placeholder="Numéro de téléphone" autocomplete="tel" required value="${esc(client.tel)}">
+    <input class="inp" name="adresse" placeholder="Adresse de livraison" autocomplete="street-address" required value="${esc(client.adresse)}">
+    <div class="tot"><span>Total</span><span class="grad">${money(total())}</span></div>
+    <button class="btn main" type="submit">Valider et payer</button>
+    <button class="link" type="button" data-act="back">← Retour au panier</button>
+    <p class="note">${esc(SITE.messagePaiement)}</p>
+  </form>`;
+}
+
+function renderDone(){
+  $("cartTitle").textContent = "Ta commande";
+  const txt = recapTexte();
+  let html = `<pre class="recap">${esc(txt)}</pre>`;
+  if (SITE.paypalMe) html += `<a class="btn main" style="margin-top:16px" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/${encodeURIComponent(SITE.paypalMe)}/${total().toFixed(2)}EUR">Payer avec PayPal</a>`;
+  if (SITE.emailCommande) html += `<a class="btn ghost" style="margin-top:12px" href="mailto:${esc(SITE.emailCommande)}?subject=${encodeURIComponent("Commande " + SITE.marque)}&body=${encodeURIComponent(txt)}">Envoyer ma commande par e-mail</a>`;
+  html += `<button class="btn ghost" style="margin-top:12px" data-act="copy">Copier ma commande</button>
+    <p class="note">${esc(SITE.messagePaiement)}<br><br>Envoie ta commande au vendeur : elle n'est pas enregistrée automatiquement.</p>`;
+  cartView.innerHTML = html;
+}
+
+cartView.addEventListener("click", e => {
+  const a = e.target.closest("[data-act]"); if (!a) return;
+  e.preventDefault();
+  const act = a.dataset.act, i = a.dataset.i;
+  if (act === "inc") cart[i]++;
+  if (act === "dec") { cart[i]--; if (cart[i] <= 0) delete cart[i]; }
+  if (act === "del") delete cart[i];
+  if (act === "inc" || act === "dec" || act === "del") { majCompteur(); renderCart(); }
+  if (act === "pay") renderForm();
+  if (act === "back") renderCart();
+  if (act === "copy") { try { navigator.clipboard.writeText(recapTexte()); a.textContent = "Copié ✓"; } catch (_) { a.textContent = "Copie impossible"; } }
+});
+cartView.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  client = { prenom: f.get("prenom"), nom: f.get("nom"), tel: f.get("tel"), adresse: f.get("adresse") };
+  if (SITE.paypalMe) {
+    try { navigator.clipboard.writeText(recapTexte()); } catch (_) {}
+    window.location.href = "https://www.paypal.com/paypalme/" + encodeURIComponent(SITE.paypalMe) + "/" + total().toFixed(2) + "EUR";   // ouvre directement PayPal
+  } else {
+    cartView.innerHTML = '<p class="note" style="color:var(--accent2);font-size:16px">⚠️ PayPal n\'est pas encore relié : écris ton pseudo PayPal.me dans « paypalMe » en haut du fichier index.html.</p><button class="link" type="button" data-act="back">← Retour au panier</button>';
+  }
+});
+client = { prenom: "", nom: "", tel: "", adresse: "" };
+majCompteur();
+
+/* bandeau (répété pour défiler en boucle) */
+const items = SITE.bandeau.map(t => `<span>${esc(t)}</span>`).join("");
+$("track").innerHTML = items + items;
+
+/* tableau */
+const mark = v => v ? '<span class="ok">✓</span>' : '<span class="no">✕</span>';
+$("cmp").innerHTML =
+  `<tr><th></th><th class="us">${esc(SITE.colNous)}</th><th>${esc(SITE.colAutre)}</th></tr>` +
+  SITE.lignes.map(l => `<tr><td>${esc(l.critere)}</td><td class="us">${mark(l.nous)}</td><td>${mark(l.autre)}</td></tr>`).join("");
+
+/* carrousel (flèches + points + glisser au doigt) */
+const L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+const R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+function carousel(list, cardEl, navEl, render){
+  let i = 0;
+  navEl.innerHTML = `<button aria-label="Précédent">${L}</button><div class="dots"></div><button aria-label="Suivant">${R}</button>`;
+  const prev = navEl.children[0], next = navEl.children[2], dots = navEl.querySelector(".dots");
+  dots.innerHTML = list.map((_, k) => `<i data-k="${k}"></i>`).join("");
+  function show(){
+    cardEl.innerHTML = render(list[i]);
+    cardEl.classList.remove("in"); void cardEl.offsetWidth; cardEl.classList.add("in");
+    [...dots.children].forEach((d, k) => d.classList.toggle("on", k === i));
+  }
+  const go = d => { i = (i + d + list.length) % list.length; show(); };
+  prev.onclick = () => go(-1); next.onclick = () => go(1);
+  dots.onclick = e => { if (e.target.dataset.k) { i = +e.target.dataset.k; show(); } };
+  let x0 = null;
+  cardEl.addEventListener("touchstart", e => x0 = e.touches[0].clientX, {passive:true});
+  cardEl.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
+  show();
+}
+carousel(SITE.cartes, $("featCard"), $("featNav"), c =>
+  `<div class="ico">${esc(c.icone)}</div><h3>${esc(c.titre)}</h3><p>${esc(c.texte)}</p>`);
+carousel(SITE.avis, $("revCard"), $("revNav"), a =>
+  (a.image ? `<img src="${esc(a.image)}" alt="Photo de ${esc(a.nom)}">` : "") +
+  `<div class="body"><div class="top"><span class="name">${esc(a.nom)}</span><span class="stars">${"★".repeat(a.note)}${"☆".repeat(5 - a.note)}</span></div>` +
+  (a.verifie ? '<div class="ver">✓ Acheteur vérifié</div>' : "") +
+  `<p>${esc(a.texte)}</p></div>`);
+
+/* apparition au scroll */
+const rv = document.querySelectorAll(".rv");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("vis"); io.unobserve(e.target); } }), {threshold:.12});
+  rv.forEach(el => io.observe(el));
+} else rv.forEach(el => el.classList.add("vis"));
+</script>
+</body>
+</html>

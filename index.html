@@ -245,12 +245,12 @@ const SITE = {
   /* ──────────────────────────────────────────────
      1) À REMPLIR EN PREMIER (très important)
      ────────────────────────────────────────────── */
-  marque: "TON NOM",            // Le nom affiché tout en haut à gauche et dans l'onglet
+  marque: "S Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
   paypalMe: "",                 // Ton pseudo PayPal.me. Si ton lien est paypal.me/clement, écris "clement".
                                 // Sans ça, le bouton « Valider et payer » n'ouvre pas PayPal.
   emailCommande: "",            // (facultatif) ton e-mail, pour que le client t'envoie sa commande
   devise: "€",                  // Le symbole de la monnaie
-  messagePaiement: "Paiement via PayPal, option « Biens et services » (protection de l'acheteur incluse).",
+  messagePaiement: "Paiement via PayPal, option « Amis proche » (protection de l'acheteur incluse).",
                                 // Le message affiché sous le formulaire de commande
 
 
@@ -275,16 +275,16 @@ const SITE = {
      ────────────────────────────────────────────── */
   hero: {
     image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png",                  // TA photo au milieu du carré en couleur. Ex: "accueil.jpg". Vide = cadre « Ta photo ici ».
-    ligne1: "Ta première ligne,",     // Gros titre, ligne 1 (en blanc)
-    ligne2: "ta ligne en couleur,",   // Gros titre, ligne 2 (en couleur)
-    ligne3: "ta dernière ligne.",     // Gros titre, ligne 3 (en blanc)
+    ligne1: "la veste que tout le monde va te demander",     // Gros titre, ligne 1 (en blanc)
+    ligne2: "premium quality",   // Gros titre, ligne 2 (en couleur)
+    ligne3: "petit prix",     // Gros titre, ligne 3 (en blanc)
 
-    badge1: { titre: "⚡ Titre 1", texte: "Sous-texte 1" },   // Petite bulle en haut à gauche de la photo
-    badge2: { titre: "📦 Titre 2", texte: "Sous-texte 2" },   // Petite bulle à droite de la photo
+    badge1: { titre: "⚡ stok limité ", texte: "1:1" },   // Petite bulle en haut à gauche de la photo
+    badge2: { titre: "📦 livraison 1-5j ", texte: "livraison gratuit" },   // Petite bulle à droite de la photo
 
-    personnesEnLigne: "",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
-    note: "X,X/5",              // Ta VRAIE note, ex: "4,8/5". Les étoiles s'adaptent toutes seules.
-    nombreAvis: "XX avis",      // Ton VRAI nombre d'avis, ex: "12 avis"
+    personnesEnLigne: "7",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
+    note: "4.8/5",              // Ta VRAIE note, ex: "4,8/5". Les étoiles s'adaptent toutes seules.
+    nombreAvis: "2780 avis",      // Ton VRAI nombre d'avis, ex: "12 avis"
 
     boutonCatalogue: "Afficher le catalogue"   // Le texte du gros bouton qui ouvre le catalogue
   },
@@ -294,19 +294,19 @@ const SITE = {
      4) BANDEAU NOIR QUI DÉFILE (sous le haut de page)
      Un texte par guillemets, séparés par des virgules. Tu peux mettre un emoji au début.
      ────────────────────────────────────────────── */
-  bandeau: ["⚡ Ton argument 1", "📦 Ton argument 2", "🔒 Ton argument 3", "✨ Ton argument 4"],
+  bandeau: ["⚡ stoke limité", "📦 livraison 1-5j", "🔒 paiement sécurisé ", "✨ Qualité garantie"],
 
 
   /* ──────────────────────────────────────────────
      5) LES CARTES AVEC FLÈCHES
      ────────────────────────────────────────────── */
   titre1: "Tout ce dont tu as besoin",    // Titre au-dessus des cartes
-  soustitre1: "Ton sous-titre ici.",      // Petit texte sous le titre
+  soustitre1: "Everything you need.",      // Petit texte sous le titre
   cartes: [
     // icone = un emoji, titre = le titre de la carte, texte = la phrase en dessous
-    { icone: "🏆", titre: "Ton titre 1", texte: "Ton texte 1." },
-    { icone: "📦", titre: "Ton titre 2", texte: "Ton texte 2." },
-    { icone: "⚡", titre: "Ton titre 3", texte: "Ton texte 3." }
+    { icone: "🏆", titre: "Qualité premium garantie", texte: "Des vestes authentiques, vérifiés et en parfait état.." },
+    { icone: "📦", titre: "Livraison ultra-rapide", texte: "réception en 1 à 5 jours ouvrés." },
+    { icone: "🌍", titre: "Fournisseur international", texte: "Accès à un réseau mondial de qualité.." }
     // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
   ],
 
@@ -317,14 +317,14 @@ const SITE = {
      autre: true = ✓ pour les autres  |  false = ✕ pour les autres
      ────────────────────────────────────────────── */
   titre2: "Pourquoi nous ?",              // Titre du tableau
-  soustitre2: "Ton sous-titre ici.",      // Petit texte sous le titre
+  soustitre2: "Parce que nos vestes sont les meilleurs..",      // Petit texte sous le titre
   colNous: "Nous",                        // Nom de ta colonne
   colAutre: "Autre",                      // Nom de la colonne des concurrents
   lignes: [
     { critere: "Bas prix",       nous: true,  autre: false },
     { critere: "Qualité",        nous: true,  autre: true  },
-    { critere: "Ton critère 3",  nous: true,  autre: false },
-    { critere: "Stock illimité", nous: false, autre: true  }
+    { critere: "livraison en 1-5j",  nous: true,  autre: false },
+    { critere: "Stock limité", nous: false, autre: true  }
   ],
 
 
@@ -351,15 +351,44 @@ const SITE = {
      image = vraie photo envoyée par le client (ex: "avis1.jpg"), vide = pas de photo
      ────────────────────────────────────────────── */
   titre3: "Ce que disent nos clients",    // Titre de la section avis
-  soustitre3: "Ton sous-titre ici.",      // Petit texte sous le titre
+  soustitre3: "What our customers say..",      // Petit texte sous le titre
   avis: [
     {
-      nom: "Prénom du client",
+      nom: "Julien mir ",
       note: 5,
       verifie: false,
-      texte: "Colle ici le vrai message du client.",
+      texte: "Qualité impressionnante, rien à redire. Livraison en 3 jours, emballage soigné.",
       image: ""
-    }
+    },
+        {
+      nom: "Alex_U65 ",
+      note: 5,
+      verifie: false,
+      texte: "Super content de ma veste Nike Brésil ! Livraison rapide, colis bien emballé, qualité au rendez-vous et conforme à l'annonce. Vendeur sérieux, je recommande !.",
+      image: ""
+    },
+       {
+      nom: "Marine donovan ",
+      note: 5,
+      verifie: false,
+      texte: "Très bonne expérience. Produits arrivés intacts. Livraison en 9 jours, qualité finale très haute..",
+      image: ""
+    },
+       {
+      nom: "Camille ",
+      note: 5,
+      verifie: false,
+      texte: "Meilleur fournisseur testé. Tout arrivé en 2 jours",
+      image: ""
+    },
+       {
+      nom: "Maxime pro ",
+      note: 5,
+      verifie: false,
+      texte: "Parfait de A à Z. Délai respecté (3 jours)",
+      image: ""
+    },
+
     // pour en ajouter un : copie tout le bloc { ... }, mets une virgule après le }
     // du bloc précédent, et change le texte
   ],
@@ -368,7 +397,7 @@ const SITE = {
   /* ──────────────────────────────────────────────
      9) BAS DE PAGE
      ────────────────────────────────────────────── */
-  piedDePage: "© 2026 TON NOM — Tous droits réservés"
+  piedDePage:
 };
 
 </script>

@@ -90,6 +90,14 @@ h2{font-size:clamp(30px,8.4vw,46px);line-height:1.05}
 .offer .pr{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px}
 .offer s{color:var(--discret);font-size:15px;font-weight:500;margin-left:6px}
 .offer small{display:block;color:var(--discret);margin-top:4px;font-size:14px}
+.pk{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:12px;border-radius:22px;border:1px solid var(--ligne);background:rgba(255,255,255,.04)}
+.pkimg{width:72px;height:88px;border-radius:14px;overflow:hidden;background:var(--carte);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.pkimg img{width:100%;height:100%;object-fit:cover}
+.pkf{flex:1;min-width:0}
+.pkf b{font-family:'Bricolage Grotesque';font-size:18px}
+.pkrow{display:flex;gap:10px;margin-top:8px}
+.pkrow label{flex:1;min-width:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--discret)}
+.pkrow select{display:block;width:100%;margin-top:4px;padding:12px 10px;border-radius:14px;border:1px solid var(--ligne);background:var(--carte);color:var(--texte);font:inherit;font-size:15px;text-transform:none;letter-spacing:0;-webkit-appearance:none;appearance:none}
 .offer{cursor:pointer}
 .offer.sel{border-color:var(--accent2);box-shadow:0 0 0 2px var(--accent2)}
 .rd{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--discret);margin-right:10px;vertical-align:-3px}
@@ -272,9 +280,15 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
       <div class="step"><i>1</i><h3>Choisis ton offre</h3></div>
       <div class="offers" id="offers"></div>
 
-      <div class="step"><i>2</i><h3>Choisis ta taille</h3></div>
-      <div class="sizes" id="sizesFiche"></div>
-      <p class="sznote" id="sznoteFiche"></p>
+      <div class="step"><i>2</i><h3 id="stepTitle2">Choisis ta taille</h3></div>
+      <div id="singleBlock">
+        <div class="sizes" id="sizesFiche"></div>
+        <p class="sznote" id="sznoteFiche"></p>
+      </div>
+      <div id="packBlock" style="display:none">
+        <p class="sznote" style="margin:-4px 0 14px">Choisis la couleur et la taille de chaque veste : 3 couleurs différentes ou plusieurs fois la même, comme tu veux.</p>
+        <div id="packList"></div>
+      </div>
       <button class="guidebtn" data-guide>📏 Guide des tailles</button>
 
       <button class="btn main" id="addProd" style="margin-top:28px">Ajouter au panier</button>
@@ -328,7 +342,7 @@ const SITE = {
   /* ──────────────────────────────────────────────
      1) À REMPLIR EN PREMIER (très important)
      ────────────────────────────────────────────── */
-  marque: "Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
+  marque: "S Sakashop",            // Le nom affiché tout en haut à gauche et dans l'onglet
   paypalMe: "",                 // Ton pseudo PayPal.me. Si ton lien est paypal.me/clement, écris "clement".
                                 // Sans ça, le bouton « Valider et payer » n'ouvre pas PayPal.
   emailCommande: "",            // (facultatif) ton e-mail, pour que le client t'envoie sa commande
@@ -388,9 +402,9 @@ const SITE = {
 
     badge2: { titre: "📦 livraison 1-5j ", texte: "livraison gratuit" },   // Petite bulle à droite de la photo
 
-    personnesEnLigne: "28",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
+    personnesEnLigne: "7",       // Ligne sous le titre (ex: "5 personnes consultent cette page"). Vide = cachée. Vrai chiffre seulement.
     note: "4.8/5",              // Ta VRAIE note, ex: "4,8/5". Les étoiles s'adaptent toutes seules.
-    nombreAvis: "1216 avis",      // Ton VRAI nombre d'avis, ex: "12 avis"
+    nombreAvis: "2780 avis",      // Ton VRAI nombre d'avis, ex: "12 avis"
 
     boutonCatalogue: "Afficher le catalogue"   // Le texte du gros bouton qui ouvre le catalogue
   },
@@ -448,7 +462,7 @@ const SITE = {
     { nom: "Veste imperméable Brésil (Beige)", image: "", dos: "", note: "5",    avis: "10",  stock: "8" },
     { nom: "Veste imperméable Brésil (Bleu)",  image: "", dos: "", note: "4,88", avis: "176", stock: "8" },
     { nom: "Veste imperméable Brésil (Jaune)", image: "", dos: "", note: "4.93", avis: "142", stock: "8" },
-    { nom: "Veste imperméable Brésil (Vert)",  image: "", dos: "", note: "4,92", avis: "323", stock: "8" },
+    { nom: "Veste imperméable Brésil (Vert)",  image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png", dos: "", note: "4,92", avis: "323", stock: "8" },
     { nom: "Veste imperméable Brésil (Rose)",  image: "", dos: "", note: "4,9",  avis: "214", stock: "8" },
     // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
   ],
@@ -478,7 +492,7 @@ const SITE = {
       image: "https://i.postimg.cc/13gxWMFq/IMG-6083.jpg"
     },
     {
-      nom: "léo donovan ",
+      nom: "Marine donovan ",
       note: 5,
       verifie: false,
       texte: "Très bonne expérience. Produits arrivés intacts. Livraison en 9 jours, qualité finale très haute..",
@@ -507,7 +521,7 @@ const SITE = {
   /* ──────────────────────────────────────────────
      9) BAS DE PAGE
      ────────────────────────────────────────────── */
-  piedDePage: "© Sakashop"
+  piedDePage: "© S Sakashop"
 };
 
 </script>
@@ -586,11 +600,40 @@ function renderOffers(){
     `<div class="offer best${offreChoisie === q ? " sel" : ""}" data-offer="${q}"><span class="tag">MEILLEURE OFFRE · -${pct} %</span>` +
     `<div class="row"><b><span class="rd"></span>Pack ${q} vestes</b><span class="pr">${money(OF.pack)}<s>${money(normal)}</s></span></div>` +
     `<small>Soit ${money(OF.pack / q)} la veste · tu économises ${money(eco)}</small>` +
-    (offreChoisie === q ? `<small>Ajoute 3 vestes (même couleur, ou mélange-les depuis le catalogue) : le prix du pack s'applique tout seul.</small>` : "") + `</div>`;
+    `</div>`;
+  const isPack = offreChoisie === q;
+  $("singleBlock").style.display = isPack ? "none" : "";
+  $("packBlock").style.display = isPack ? "" : "none";
+  $("stepTitle2").textContent = isPack ? "Compose ton pack de " + q + " vestes" : "Choisis ta taille";
   const b = $("addProd"); if (b) b.textContent = offreChoisie === 1 ? "Ajouter au panier" : "Ajouter le pack de " + q;
 }
 renderOffers();
-$("offers").addEventListener("click", e => { const o = e.target.closest("[data-offer]"); if (o) { offreChoisie = +o.dataset.offer; renderOffers(); } });
+$("offers").addEventListener("click", e => { const o = e.target.closest("[data-offer]"); if (o) { offreChoisie = +o.dataset.offer; renderOffers(); renderPack(); } });
+
+/* pack : une couleur + une taille par veste */
+let packSel = [];
+const couleurDe = p => (p.nom.match(/\(([^)]+)\)/) || [])[1] || p.nom;
+function initPack(){
+  const n = SITE.produits.length;
+  packSel = Array.from({ length: OF.packQte }, (_, k) => ({ c: (cur + k) % n, t: taille }));
+}
+function renderPack(){
+  $("packList").innerHTML = packSel.map((s, k) => {
+    const p = SITE.produits[s.c];
+    return `<div class="pk"><div class="pkimg">${p.image ? `<img src="${esc(p.image)}" alt="">` : "🧱"}</div>
+      <div class="pkf"><b>Veste ${k + 1}</b>
+      <div class="pkrow">
+        <label>Couleur<select data-pc="${k}">${SITE.produits.map((q, j) => `<option value="${j}"${j === s.c ? " selected" : ""}>${esc(couleurDe(q))}</option>`).join("")}</select></label>
+        <label>Taille<select data-pt="${k}">${SITE.tailles.map(x => `<option${x.t === s.t ? " selected" : ""}>${esc(x.t)}</option>`).join("")}</select></label>
+      </div></div></div>`;
+  }).join("");
+}
+$("packList").addEventListener("change", e => {
+  const c = e.target.dataset.pc, t = e.target.dataset.pt;
+  if (c != null) packSel[+c].c = +e.target.value;
+  if (t != null) packSel[+t].t = e.target.value;
+  renderPack();
+});
 
 /* ---------- tailles ---------- */
 let taille = SITE.tailles.length > 1 ? SITE.tailles[1].t : SITE.tailles[0].t;   // S par défaut
@@ -637,15 +680,17 @@ function openProd(i){
   cur = i; const p = SITE.produits[i];
   gal = [{ label: "Devant", image: p.image }, { label: "Derrière", image: p.dos }]; gi = 0;
   $("prodTitle").textContent = p.nom;
-  renderGal(); renderSizes();
+  renderGal(); renderSizes(); initPack(); renderPack();
   prodSheet.classList.add("open"); prodSheet.setAttribute("aria-hidden","false"); prodSheet.scrollTop = 0;
 }
 function closeProd(){ prodSheet.classList.remove("open"); prodSheet.setAttribute("aria-hidden","true"); }
 $("closeProd").onclick = closeProd;
 $("grid").addEventListener("click", e => { const b = e.target.closest("[data-open]"); if (b) openProd(+b.dataset.open); });
 $("addProd").onclick = () => {
-  const k = cur + "|" + taille; cart[k] = (cart[k] || 0) + offreChoisie; majCompteur();
-  const b = $("addProd"); b.textContent = "Ajouté ✓ (taille " + taille + ")"; setTimeout(renderOffers, 1100);
+  if (offreChoisie === OF.packQte) packSel.forEach(s => { const k = s.c + "|" + s.t; cart[k] = (cart[k] || 0) + 1; });
+  else { const k = cur + "|" + taille; cart[k] = (cart[k] || 0) + 1; }
+  majCompteur();
+  const b = $("addProd"); b.textContent = "Ajouté ✓"; setTimeout(renderOffers, 1100);
 };
 $("seeCart").onclick = () => openCart();
 const sheet = $("sheet");

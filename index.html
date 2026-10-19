@@ -33,7 +33,7 @@ header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-
 .hv{position:relative;padding:44px 0;margin-bottom:28px}
 .hv-panel{position:absolute;left:2%;right:2%;top:14px;bottom:14px;background:var(--grad);border-radius:48px 48px 48px 100px;transform:rotate(-6deg);box-shadow:0 30px 80px -20px var(--accent)}
 .hv-panel:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.35),transparent 55%)}
-.hv-img{position:relative;display:block;width:72%;aspect-ratio:3/4;margin:0 auto;object-fit:cover;border-radius:28px;background:var(--carte);box-shadow:0 25px 50px rgba(0,0,0,.45);animation:float 6s ease-in-out infinite}
+.hv-img{position:relative;display:block;width:72%;aspect-ratio:3/4;margin:0 auto;object-fit:contain;background:none;filter:drop-shadow(0 25px 30px rgba(0,0,0,.45));animation:float 6s ease-in-out infinite}
 .hv-ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--discret);font-weight:600}
 .badge{position:absolute;padding:12px 16px;border-radius:20px;background:rgba(20,16,40,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);font-size:13px;line-height:1.3;animation:float 5s ease-in-out infinite}
 .badge b{display:block;font-size:15px}
@@ -406,7 +406,7 @@ const SITE = {
      3) HAUT DE PAGE (la première chose qu'on voit)
      ────────────────────────────────────────────── */
   hero: {
-    image: "https://i.postimg.cc/9X4cbPGq/IMG-6107.jpg",                  // TA photo au milieu du carré en couleur. Ex: "accueil.jpg". Vide = cadre « Ta photo ici ».
+    image: "https://i.postimg.cc/BZ1B0yTg/Photoroom-20261019-114055.png",                  // TA photo au milieu du carré en couleur. Ex: "accueil.jpg". Vide = cadre « Ta photo ici ».
     ligne1: "La meilleur veste",     // Gros titre, ligne 1 (en blanc)
     ligne2: "premium quality",   // Gros titre, ligne 2 (en couleur)
     ligne3: "petit prix",     // Gros titre, ligne 3 (en blanc)

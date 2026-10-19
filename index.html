@@ -64,16 +64,11 @@ section{max-width:640px;margin:0 auto;padding:64px 20px 10px;text-align:center}
 h2{font-size:clamp(30px,8.4vw,46px);line-height:1.05}
 .sub{color:var(--discret);margin:14px 0 32px;font-size:17px}
 
-/* fiche produit : photos + livraison + offres + tailles */
+/* fiche produit : photo + livraison + offres + tailles */
 .fiche{padding-top:40px}
 .gal-main{position:relative;border-radius:32px;overflow:hidden;background:var(--carte);border:1px solid var(--ligne);aspect-ratio:3/4}
 .gal-main img{width:100%;height:100%;object-fit:cover;display:block}
 .gal-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--discret);font-weight:600}
-.gal-tag{position:absolute;left:14px;top:14px;padding:7px 14px;border-radius:999px;background:rgba(20,16,40,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);font-size:13px;font-weight:600}
-.thumbs{display:flex;gap:12px;margin-top:14px}
-.thumb{width:84px;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:2px solid var(--ligne);background:var(--carte);cursor:pointer;padding:0;position:relative;color:var(--discret);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.thumb.on{border-color:var(--accent2)}
 .deliv{display:flex;align-items:center;gap:16px;margin-top:22px;padding:16px 20px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid var(--ligne);text-align:left}
 .deliv small{display:block;color:var(--discret);font-size:13px}
 .deliv b{font-size:18px}
@@ -118,6 +113,11 @@ body.cart-open .cartfloat{display:none}
 .gt th{background:rgba(255,255,255,.07);font-family:'Bricolage Grotesque'}
 .gt td:first-child{font-weight:600;text-align:left;padding-left:8px}
 .gt tr.hl td,.gt th.hl{background:rgba(255,207,63,.14)}
+.gt .col{background:rgba(255,207,63,.18)}
+.est{margin:0 0 24px;padding:20px;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid var(--ligne);text-align:left}
+.est h3{font-size:20px;margin-bottom:2px}
+.est .estrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.est .estres{margin-top:14px;font-size:17px;text-align:center}
 
 /* cartes + flèches */
 .card{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--ligne);border-radius:32px;padding:32px 28px;text-align:left;min-height:250px;touch-action:pan-y}
@@ -269,7 +269,6 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
       <button class="x" id="closeProd" aria-label="Fermer">✕</button></div>
     <div style="text-align:left;margin-top:20px">
       <div class="gal-main" id="galMain"></div>
-      <div class="thumbs" id="thumbs"></div>
 
       <div class="deliv">
         <div><small>Livré entre</small><b id="livDates"></b></div>
@@ -307,7 +306,18 @@ pre.recap{white-space:pre-wrap;text-align:left;background:rgba(255,255,255,.05);
 <div class="sheet" id="sizeSheet" aria-hidden="true">
   <div class="sheet-in">
     <div class="sheet-top"><h2>Guide des tailles</h2><button class="x" id="closeSize" aria-label="Fermer">✕</button></div>
-    <p class="sub">Trouve ton poids <b>et</b> ta taille dans le tableau : la colonne où les deux se croisent, c'est ta taille de veste. Entre deux tailles ? Prends la taille au-dessus pour plus de confort.</p>
+    <p class="sub">Entre ton poids et ta taille pour connaître la taille de veste à choisir, ou regarde le tableau ci-dessous. Entre deux tailles ? Prends la taille au-dessus pour plus de confort.</p>
+
+    <div class="est">
+      <h3>Trouve ta taille</h3>
+      <div class="estrow">
+        <input class="inp" id="estPoids" type="number" inputmode="decimal" placeholder="Poids (kg)">
+        <input class="inp" id="estHaut" type="number" inputmode="decimal" placeholder="Taille (cm)">
+      </div>
+      <button class="btn main" id="estBtn" type="button" style="margin-top:12px">Calculer ma taille</button>
+      <p class="estres" id="estRes"></p>
+    </div>
+
     <table class="gt" id="sizeTable"></table>
   </div>
 </div>
@@ -364,7 +374,8 @@ const SITE = {
     joursMax: 6,                // « Livré entre » : fin = aujourd'hui + 6 jours (le 19 → le 25)
     texte: "Livraison gratuite" // Texte à droite de la case de livraison
   },
-  // Taille, tranche de poids, tranche de hauteur (utilisées dans le guide des tailles)
+  // Taille, tranche de poids, tranche de hauteur (utilisées dans le guide des tailles
+  // ET dans le calculateur de taille : garde le format "58-66 kg" / "-58 kg" / "162-170 cm")
   tailles: [
     { t: "XS",  poids: "-58 kg",    hauteur: "-162 cm" },
     { t: "S",   poids: "58-66 kg",  hauteur: "162-170 cm" },
@@ -452,18 +463,18 @@ const SITE = {
      7) LE CATALOGUE (s'ouvre quand on appuie sur le gros bouton)
      Le prix vient de « offre » plus haut (19.95 € l'unité, 3 pour 39.99 €).
      image = photo de DEVANT (lien ou nom de fichier), vide = petite brique 🧱
-     dos   = photo de DERRIÈRE (affichée quand on ouvre la veste), vide = cadre « Photo ici »
+     (une seule photo par veste, plus de photo de dos)
      note / avis / stock = laisse "" tant que tu n'as pas de vrais chiffres (rien ne s'affiche)
      ────────────────────────────────────────────── */
   titre4: "Le catalogue",                 // Titre en haut du catalogue
   soustitre4: "Choisis ta couleur.",      // Petit texte sous le titre
   produits: [
-    { nom: "Veste imperméable Brésil (Noir)",  image: "https://i.postimg.cc/bYWb4wSh/IMG-6096.webp", dos: "", note: "4,87", avis: "351", stock: "8" },
+    { nom: "Veste imperméable Brésil (Noir)",  image: "https://i.postimg.cc/bYWb4wSh/IMG-6096.webp", note: "4,87", avis: "351", stock: "8" },
     { nom: "Veste imperméable Brésil (Beige)", image: "https://i.postimg.cc/wBwR2qYk/IMG-6101.webp", note: "5",    avis: "10",  stock: "8" },
-    { nom: "Veste imperméable Brésil (Bleu)",  image: "", dos: "", note: "4,88", avis: "176", stock: "8" },
-    { nom: "Veste imperméable Brésil (Jaune)", image: "", dos: "", note: "4.93", avis: "142", stock: "8" },
-    { nom: "Veste imperméable Brésil (Vert)",  image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png", dos: "", note: "4,92", avis: "323", stock: "8" },
-    { nom: "Veste imperméable Brésil (Rose)",  image: "", dos: "", note: "4,9",  avis: "214", stock: "8" },
+    { nom: "Veste imperméable Brésil (Bleu)",  image: "", note: "4,88", avis: "176", stock: "8" },
+    { nom: "Veste imperméable Brésil (Jaune)", image: "", note: "4.93", avis: "142", stock: "8" },
+    { nom: "Veste imperméable Brésil (Vert)",  image: "https://i.postimg.cc/Y23NG3Tb/Photoroom-20261018-225118.png", note: "4,92", avis: "323", stock: "8" },
+    { nom: "Veste imperméable Brésil (Rose)",  image: "", note: "4,9",  avis: "214", stock: "8" },
     // pour en ajouter : copie une ligne, mets une virgule à la fin de celle d'avant
   ],
 
@@ -563,19 +574,14 @@ $("heroBtn").textContent = H.boutonCatalogue;
 const OF = SITE.offre;
 const money = n => n.toFixed(2).replace(".", ",") + " " + SITE.devise;
 
-/* ---------- photos devant / derrière ---------- */
-let gal = [], gi = 0, cur = 0;
+/* ---------- photo unique (face) ---------- */
+let cur = 0;
 function renderGal(){
-  const g = gal[gi];
-  if (!g) return;
-  $("galMain").innerHTML =
-    (g.image ? `<img src="${esc(g.image)}" alt="Veste ${esc(g.label)}">` : `<div class="gal-ph">Photo ${esc(String(g.label).toLowerCase())} ici</div>`) +
-    `<span class="gal-tag">${esc(g.label)}</span>`;
-  $("thumbs").innerHTML = gal.map((x, k) =>
-    `<button class="thumb${k === gi ? " on" : ""}" data-g="${k}" aria-label="${esc(x.label)}">` +
-    (x.image ? `<img src="${esc(x.image)}" alt="${esc(x.label)}">` : esc(x.label)) + `</button>`).join("");
+  const p = SITE.produits[cur];
+  $("galMain").innerHTML = p.image
+    ? `<img src="${esc(p.image)}" alt="${esc(p.nom)}">`
+    : `<div class="gal-ph">Photo ici</div>`;
 }
-$("thumbs").addEventListener("click", e => { const b = e.target.closest("[data-g]"); if (b) { gi = +b.dataset.g; renderGal(); } });
 
 /* ---------- livraison : date calculée automatiquement ---------- */
 const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
@@ -651,14 +657,30 @@ document.addEventListener("click", e => {
 renderSizes();
 
 /* guide des tailles (tableau) */
-function renderSizeTable(){
-  const T = SITE.tailles;
+function renderSizeTable(sel){
+  const T = SITE.tailles, c = x => x.t === sel ? ' class="col"' : "";
   $("sizeTable").innerHTML =
-    `<tr><th>Taille</th>${T.map(x => `<th>${esc(x.t)}</th>`).join("")}</tr>` +
-    `<tr><td>Poids</td>${T.map(x => `<td>${esc(x.poids)}</td>`).join("")}</tr>` +
-    `<tr><td>Hauteur</td>${T.map(x => `<td>${esc(x.hauteur)}</td>`).join("")}</tr>`;
+    `<tr><th>Taille</th>${T.map(x => `<th${c(x)}>${esc(x.t)}</th>`).join("")}</tr>` +
+    `<tr><td>Poids</td>${T.map(x => `<td${c(x)}>${esc(x.poids)}</td>`).join("")}</tr>` +
+    `<tr><td>Hauteur</td>${T.map(x => `<td${c(x)}>${esc(x.hauteur)}</td>`).join("")}</tr>`;
 }
 renderSizeTable();
+
+/* calculateur : poids + taille -> taille de veste conseillée */
+function tailleConseillee(kg, cm){
+  const T = SITE.tailles;
+  const max = s => +(String(s).match(/\d+/g) || []).pop();
+  const idx = (v, cle) => { const k = T.findIndex(x => v < max(x[cle])); return k < 0 ? T.length - 1 : k; };
+  return T[Math.max(idx(kg, "poids"), idx(cm, "hauteur"))];   // on prend la plus grande des deux (confort)
+}
+$("estBtn").onclick = () => {
+  const kg = parseFloat($("estPoids").value), cm = parseFloat($("estHaut").value), r = $("estRes");
+  if (!kg || !cm || kg < 20 || kg > 250 || cm < 100 || cm > 250) { r.textContent = "Entre ton poids (kg) et ta taille (cm)."; return; }
+  const t = tailleConseillee(kg, cm);
+  taille = t.t; renderSizes(); renderSizeTable(t.t);
+  r.innerHTML = `Ta taille conseillée : <b class="grad" style="font-size:30px">${esc(t.t)}</b><br><small style="color:var(--discret)">Elle est déjà sélectionnée pour toi.</small>`;
+};
+
 const sizeSheet = $("sizeSheet");
 function openSize(){ sizeSheet.classList.add("open"); sizeSheet.setAttribute("aria-hidden","false"); sizeSheet.scrollTop = 0; }
 function closeSize(){ sizeSheet.classList.remove("open"); sizeSheet.setAttribute("aria-hidden","true"); }
@@ -678,7 +700,6 @@ $("grid").innerHTML = SITE.produits.map((p, i) =>
 const prodSheet = $("prodSheet");
 function openProd(i){
   cur = i; const p = SITE.produits[i];
-  gal = [{ label: "Devant", image: p.image }, { label: "Derrière", image: p.dos }]; gi = 0;
   $("prodTitle").textContent = p.nom;
   renderGal(); renderSizes(); initPack(); renderPack();
   prodSheet.classList.add("open"); prodSheet.setAttribute("aria-hidden","false"); prodSheet.scrollTop = 0;
@@ -849,3 +870,4 @@ if ("IntersectionObserver" in window) {
 </script>
 </body>
 </html>
+
